@@ -1,6 +1,7 @@
 package db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -58,13 +59,21 @@ public class DB {
 	
 	public void addUser(UserModel user) {
 		// Création de la requête
-		java.sql.Statement query;
+		PreparedStatement query;
 		try
 		{
 			//Creation  de l'élément  de requète
-			query =  connection.createStatement();
-			//TODO  créez la requête permettant d’ajout un utilisateur avec ts ces paramètres
-			//((`surname`, `lastname`, `age`, `login`, `pwd`)
+			String sql="INSERT INTO binome25.User (surname, lastname, login, pwd, age) VALUES('?', '?', '?', '?', '?');";
+			query =  connection.prepareStatement(sql);
+			
+			
+			query.setString(1, user.getSurname());
+			query.setString(2, user.getLastname());
+			query.setString(3, user.getLogin());
+			query.setString(4, user.getPwd());
+			query.setInt(5, user.getAge());
+			
+			query.close();
 			connection.close();
 		} 
 		catch

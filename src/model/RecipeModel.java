@@ -1,6 +1,6 @@
 package model;
 
-public class RecipeModelBean {
+public class RecipeModel {
 	private String title;
 	private String description;
 	private int expertise;
@@ -43,8 +43,8 @@ public class RecipeModelBean {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public RecipeModelBean(){}
-	public RecipeModelBean(String title, String description, int expertise,
+	public RecipeModel(){}
+	public RecipeModel(String title, String description, int expertise,
 			int nbpeople, int duration, String type) {
 		super();
 		this.title = title;

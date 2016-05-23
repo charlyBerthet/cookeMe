@@ -10,11 +10,11 @@ public final class DaoFabric {
 	// De Java version 1.2 à 1.4, il est possible d'utiliser la classe
 	// ThreadLocal.
 	private static volatile DaoFabric instance=null;
-	private static final String DB_HOST = "db-tp.cpe.fr";
-	private static final String DB_PORT="3306";
-	private static final String DB_NAME="binome32";
-	private static final String DB_USER=" binome32";
-	private static final String DB_PWD="binome32";
+	private static final String DB_HOST = "master.granetlucas.fr";
+	private static final String DB_PORT="80";
+	private static final String DB_NAME="cookbcf";
+	private static final String DB_USER=" cookbcf";
+	private static final String DB_PWD="cookbcfpw";
 	private DaoFabric() {
 		super();
 		try{

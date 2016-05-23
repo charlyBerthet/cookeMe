@@ -1,8 +1,8 @@
 package dao.instance;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -47,7 +47,22 @@ public class RecipesDao {
 	}
 	
 	public ArrayList<RecipeModel> getAllRecipes() {
-		//TODO
+		ArrayList<RecipeModel> recipeList=new ArrayList<RecipeModel>();
+		java.sql.Statement query;
+		try{
+			// create connection
+			connection = connect();
+			query =  connection.createStatement();
+			String sql="SELECT description, title, expertise, nbpeople, duration, type FROM cookbcf.recipe";
+			ResultSet result = query.executeQuery(sql);
+			while(result.next()){
+				recipeList.add(new RecipeModel(result.getString("title"), result.getString("description"), result.getInt("expertise"), result.getInt("nbpeople"), result.getInt("duration"), result.getString("type")));
+			}
+			query.close();
+			connection.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 	

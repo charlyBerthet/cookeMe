@@ -33,4 +33,26 @@ public class RecipeControlerBean {
 		//place la liste de recette dans l'espace de mémoire de JSF
 		sessionMap.put("recipeList", recipeList);
 	}
+
+
+	public String addRecipe(RecipeModel recipe){
+		//TODO ajouter la recette provenant du formulaire
+		//Redirection vers une page de confirmation
+		return "successfulRegister.xhtml";
+	}
+	
+	
+	public String searchRecipe(RecipeModel recipe){
+		//TODO effectuer une recherche des recettes répondant aux critères passés en
+		//parametre, récupérer la liste des recettes correspondantes et demander à
+		//recipeResultList.xhtml d’afficher les recettes trouvées
+		return "recipeResultList.xhtml";
+	}
+	
+	
+	public String displayRecipeDetail(RecipeModel recipe){
+		//TODO demander à recipeDetail.jsf d’afficher les details de la recette passée en
+		//paramètre
+		return "recipeDetail.jsf";
+	}
 }

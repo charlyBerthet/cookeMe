@@ -5,28 +5,25 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <head>
-<title>Step2: Form</title>
+<title>title</title>
 </head>
 <body>
-	<h1>User Display</h1>
+	<h1>Search Recipts</h1>
 	<h:form>
-		<table border="0">
+		<table>
 			<tr>
-				<td>Your Login</td>
-				<td><h:outputText value="#{loggedUser.login}" /></td>
+				<th>Title</th>
+				<th>Type</th>
+				<th>Description</th>
+				<th>Expertise</th>
+				<th>Duration</th>
+				<th>NbPeople</th>
 			</tr>
-			<tr>
-				<td>Your surname</td>
-				<td><h:outputText value="#{loggedUser.surname}" /></td>
-			</tr>
-			<tr>
-				<td>Your lastname</td>
-				<td><h:outputText value="#{loggedUser.lastname}" /></td>
-			</tr>
-			<tr>
-				<td>Your age</td>
-				<td><h:outputText value="#{loggedUser.age}" /></td>
-			</tr>
+			//TODO utiliser un outil de JSF permettant d’afficher le contenu
+			d’une liste à chaque itération nous recipe sera la cette courant
+			Afficher l’ensemble des éléments recipe dans le tableau Note utiliser
+			h:commandLink pour permettre de créer un lien vers le détail de la
+			recette courante
 		</table>
 	</h:form>
 </body>

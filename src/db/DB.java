@@ -3,29 +3,9 @@ public class DB {
 	private static final String DB_HOST = "db-tp.cpe.fr";
 	
 	private static final String DB_PORT = "3306";
-	private
-	static
-	final
-	String
-	DB_NAME
-	=
-	"binome32"
-	;
-	private
-	static
-	final
-	String
-	DB_USER
-	=
-	"binome32"
-	;
-	private
-	static
-	final
-	String
-	DB_PWD
-	=
-	"binome32"
+	private static final String DB_NAME = "binome32";
+	private static final String DB_USER = "binome32";
+	private static final String DB_PWD = "binome32"
 	;
 	private
 	Connection 

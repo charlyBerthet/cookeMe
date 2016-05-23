@@ -2,6 +2,7 @@ package db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -42,11 +43,14 @@ public class DB {
 		{
 			query =  connection.createStatement();
 			//Création du contenu de la requête aéxécuter
-			String sql="SELECT surname, lastname, login, pwd, age FROM binome25.User;";
+			String sql="SELECT surname, lastname, login, pwd, age FROM binome25.User";
 			//Exécution de la requête de modification
-			query.executeQuery(sql);
+			ResultSet result = query.executeQuery(sql);
+			while(result.next()){
+				userList.add(new UserModel(result.getString("surname"), result.getString("surname"), result.getInt("age"), result.getString("login"), result.getString("pwd")));
+			}
 			query.close();
-			connection.close();
+			//connection.close();
 		} 
 		catch
 		(SQLException e) {
@@ -63,7 +67,7 @@ public class DB {
 		try
 		{
 			//Creation  de l'élément  de requète
-			String sql="INSERT INTO binome25.User (surname, lastname, login, pwd, age) VALUES('?', '?', '?', '?', '?');";
+			String sql="INSERT INTO binome25.User (surname, lastname, login, pwd, age) VALUES('?', '?', '?', '?', '?')";
 			query =  connection.prepareStatement(sql);
 			
 			
@@ -74,7 +78,7 @@ public class DB {
 			query.setInt(5, user.getAge());
 			
 			query.close();
-			connection.close();
+			//connection.close();
 		} 
 		catch
 		(SQLException e) {

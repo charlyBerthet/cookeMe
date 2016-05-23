@@ -35,7 +35,6 @@ public class Servlet1 extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<UserModel> lt = new ArrayList<>(db.getData());
-		
 		for(UserModel currentUser : lt){
 			response.getWriter().write(currentUser.toString());
 		}

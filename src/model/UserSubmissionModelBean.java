@@ -8,5 +8,6 @@ import javax.faces.bean.RequestScoped;
 public class UserSubmissionModelBean extends UserModelBean{
 	
 	public UserSubmissionModelBean() {
+		super();
 	}
 }

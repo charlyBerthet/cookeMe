@@ -13,7 +13,7 @@ public class UserModelBean {
 	private String login;
 	private String pwd;
 	
-	
+	public UserModelBean(){}
 	public UserModelBean(String lastname, String surname, int age,
 			String login, String pwd) {
 		super();

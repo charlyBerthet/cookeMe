@@ -9,6 +9,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import model.RecipeListModelBean;
+import model.RecipeModel;
 import dao.fabric.DaoFabric;
 import dao.instance.RecipesDao;
 

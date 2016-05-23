@@ -72,8 +72,27 @@ public class UserDao {
 	}
 
 	public UserModelBean checkUser(String login, String pwd) {
-		// TODO 
-		return null;
+		PreparedStatement query;
+		UserModelBean userCheck =null;
+		try{
+			// create connection
+			connection= java.sql.DriverManager.getConnection("jdbc:mysql://"+dB_HOST+":"+dB_PORT+"/"+dB_NAME,dB_USER, dB_PWD);
+			String sql="SELECT * FROM User WHERE login=? AND pwd =?";
+			query =  connection.prepareStatement(sql);
+			query.setString(1, login);
+			query.setString(2, pwd);
+			
+			ResultSet result = query.executeQuery(sql);
+			
+			if(result.next()){
+				userCheck = new UserModelBean(result.getString("lastname"), result.getString("surname"), result.getInt("age"), result.getString("login"), result.getString("pwd"));
+			}
+			query.close();
+			connection.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return userCheck;
 	}
 
 }

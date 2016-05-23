@@ -13,22 +13,47 @@
 		<table border="0">
 			<tr>
 				<td>Title</td>
-				<td><h:inputText id="recipeTitle"
-						value="#{recipeSubmissionModelBean.title}" required="true">
-					</h:inputText></td>
+				<td><h:inputText id="recipeTitle" value="#{recipeSubmissionModelBean.title}" required="true"></h:inputText></td>
 			</tr>
-			<!-- TODO formulaire de saisie de type et description  -->
+			<tr>
+				<td>Type</td>
+				<td><h:inputText id="recipeType" value="#{recipeSubmissionModelBean.type}" required="true"></h:inputText></td>
+			</tr>
+			<tr>
+				<td>Description</td>
+				<td><h:inputText id="recipeDescription" value="#{recipeSubmissionModelBean.description}" required="true"></h:inputText></td>
+			</tr>
+
 			<tr>
 				<td>Expertise</td>
 				<td><h:inputText id="recipeExpertise"
 						value="#{recipeSubmissionModelBean.expertise}" required="true">
 						<f:convertNumber integerOnly="true" type="number" />
-					</h:inputText></td>
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>Nombre de personne</td>
+				<td><h:inputText id="recipeNbpeople"
+						value="#{recipeSubmissionModelBean.nbpeople}" required="true">
+						<f:convertNumber integerOnly="true" type="number" />
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>Duration</td>
+				<td><h:inputText id="recipeDuration"
+						value="#{recipeSubmissionModelBean.duration}" required="true">
+						<f:convertNumber integerOnly="true" type="number" />
+					</h:inputText>
+				</td>
 			</tr>
 			<!-- //TODO formulaire de saisie de NbPeople et duration -->
+			
+			<tr>
 			<td></td>
 			<td><h:commandButton value="OK"
-					action="#{userControlerBean.addRecipe(recipeSubmissionModelBean)}" />
+					action="#{recipeControlerBean.addRecipe(recipeSubmissionModelBean)}" />
 			</td>
 			</tr>
 		</table>

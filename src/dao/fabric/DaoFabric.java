@@ -13,7 +13,7 @@ public final class DaoFabric {
 	private static final String DB_HOST = "master.granetlucas.fr";
 	private static final String DB_PORT="80";
 	private static final String DB_NAME="cookbcf";
-	private static final String DB_USER=" cookbcf";
+	private static final String DB_USER="cookbcf";
 	private static final String DB_PWD="cookbcfpw";
 	private DaoFabric() {
 		super();

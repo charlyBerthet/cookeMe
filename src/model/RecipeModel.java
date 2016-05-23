@@ -59,8 +59,9 @@ public class RecipeModel {
 	
 	
 	public String toString(){
-		//TODO
-		return "";
+		return"[TITLE]:"+this.getTitle()+",[DESCRIPTION]:"+this.getDescription()
+				+",[EXPERTISE]:"+this.getExpertise()+",[NBPEOPLE]:"+this.getNbpeople()
+				+",[DURATION]:"+this.getDuration()+",[TYPE]:"+this.getType();
 	}
 	
 	

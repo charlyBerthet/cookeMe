@@ -36,7 +36,7 @@ public class RecipeControlerBean {
 
 
 	public String addRecipe(RecipeModel recipe){
-		//TODO ajouter la recette provenant du formulaire
+		this.recipeDao.addRecipe(recipe);
 		//Redirection vers une page de confirmation
 		return "successfulRegister.xhtml";
 	}
@@ -46,6 +46,7 @@ public class RecipeControlerBean {
 		//TODO effectuer une recherche des recettes répondant aux critères passés en
 		//parametre, récupérer la liste des recettes correspondantes et demander à
 		//recipeResultList.xhtml d’afficher les recettes trouvées
+		
 		return "recipeResultList.xhtml";
 	}
 	

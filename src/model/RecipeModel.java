@@ -7,6 +7,8 @@ public class RecipeModel {
 	private int nbpeople;
 	private int duration;
 	private String type;
+	
+	
 	public String getTitle() {
 		return title;
 	}

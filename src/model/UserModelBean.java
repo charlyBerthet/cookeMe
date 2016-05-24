@@ -2,28 +2,30 @@ package model;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import java.io.Serializable;
 
 @ManagedBean
 @SessionScoped
-public class UserModelBean {
+public class UserModelBean implements Serializable {
 
 	private String lastname;
 	private String surname;
-	private int age;
+	private String email;
 	private String login;
 	private String pwd;
-	
+	private int age;
+
 	public UserModelBean(){}
-	public UserModelBean(String lastname, String surname, int age,
-			String login, String pwd) {
-		super();
+
+	public UserModelBean(String lastname, String surname, String email, String login, String pwd, int age) {
 		this.lastname = lastname;
 		this.surname = surname;
-		this.age = age;
+		this.email = email;
 		this.login = login;
 		this.pwd = pwd;
+		this.age = age;
 	}
-	
+
 	public String getLastname() {
 		return lastname;
 	}

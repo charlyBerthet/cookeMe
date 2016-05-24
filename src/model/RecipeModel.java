@@ -1,6 +1,8 @@
 package model;
 
-public class RecipeModel {
+import java.io.Serializable;
+
+public class RecipeModel implements Serializable{
 	private String title;
 	private String description;
 	private int expertise;

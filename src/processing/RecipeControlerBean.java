@@ -1,5 +1,6 @@
 package processing;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ import dao.instance.RecipesDao;
 
 @ManagedBean
 @ApplicationScoped
-public class RecipeControlerBean {
+public class RecipeControlerBean implements Serializable{
 	private RecipesDao recipeDao;
 	public RecipeControlerBean() {
 		this.recipeDao=DaoFabric.getInstance().createRecipesDao();

@@ -57,4 +57,33 @@ public class UserControlerBean implements Serializable{
 		//ajout de l'utilisateur à la base de données
 		
 	}
+
+	
+	
+	public boolean isLogged(){
+		ExternalContext externalContext =
+				FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		UserModelBean user = (UserModelBean)sessionMap.get("loggedUser");
+		if(user == null) return false;
+		if(user.getLogin() == null) return false;
+		return true;
+	}
+	
+	
+	public void logout(){
+		ExternalContext externalContext =
+				FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		sessionMap.put("loggedUser", null);
+	}
+	
+	
+	public UserModelBean getLoggedUser(){
+		ExternalContext externalContext =
+				FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		UserModelBean user = (UserModelBean)sessionMap.get("loggedUser");
+		return user;
+	}
 }

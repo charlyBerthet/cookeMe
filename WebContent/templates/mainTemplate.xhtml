@@ -29,56 +29,57 @@
 
 
 				<!-- REGISTER -->
-				<div class="ui-grid-col-2 nav-header-button">
-					<p:button icon="ui-icon-plus"></p:button>
-					Become member
-				</div>
+				<p:outputPanel id="registerBlock" class="ui-grid-col-2 nav-header-button">
+					<h:form rendered="#{!userControlerBean.isLogged()}">
+						<p:button icon="ui-icon-plus"></p:button>
+						Become member
+					</h:form>
+				</p:outputPanel>
 
 
 				<!-- LOGIN -->
-				<div class="ui-grid-col-2 nav-header-button nav-header-login">
-					
-					<c:choose>
-						<!-- IS NOT LOGGED -->
-						<c:when test="#{userModelBean.login==null}">
-							<h:form>
-								<p:growl id="growlLogin" showDetail="true" sticky="true" />
-								<div class="ui-grid ui-grid-responsive">
-									<div class="ui-grid-row">
-										<div class="ui-grid-col-12">
-											<p:inputText id="login" value="#{loginBean.login}" />
-											<p:watermark for="login" value="Login" />
-										</div>
-									</div>
-									<div class="ui-grid-row">
-										<div class="ui-grid-col-12">
-											<p:password id="password" value="#{loginBean.pwd}" />
-											<p:watermark for="password" value="Password" />
-										</div>
-									</div>
-									<div class="ui-grid-row">
-										<div class="ui-grid-col-12">
-											<p:commandButton id="butLogin" icon="ui-icon-check"
-												actionListener="#{userControlerBean.checkUser(loginBean)}"
-												update="growlLogin" />
-										</div>
-									</div>
+				<p:outputPanel style="display:block"
+					class="ui-grid-col-3 nav-header-button nav-header-login"
+					id="loginLogoutBlock">
+					<p:growl showDetail="true" sticky="true" />
+					<!-- IS NOT LOGGED -->
+					<h:form  rendered="#{!userControlerBean.isLogged()}">
+						
+						<div class="ui-grid ui-grid-responsive">
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-12">
+									<p:inputText id="login" value="#{loginBean.login}" />
+									<p:watermark for="login" value="Login" />
 								</div>
-							</h:form>
-						</c:when>
+							</div>
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-12">
+									<p:password id="password" value="#{loginBean.pwd}" />
+									<p:watermark for="password" value="Password" />
+								</div>
+							</div>
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-12">
+									<p:commandButton id="butLogin" icon="fa fa-sign-in"
+										actionListener="#{userControlerBean.checkUser(loginBean)}"
+										update="loginLogoutBlock registerBlock" />
+								</div>
+							</div>
+						</div>
+					</h:form>
 
-						<!-- IS LOGGED -->
-						<c:otherwise>
-							<p>Welcome <a>JDoe</a></p>
-							<p>//TODO > 52 users already connected</p>
-							<p:commandButton id="butLogout" icon="fa fa-sign-out"/>
-						</c:otherwise>
-					</c:choose>
+					<!-- IS LOGGED -->
+					<h:form  rendered="#{userControlerBean.isLogged()}">
+						<p>
+							Welcome <a href="">#{userControlerBean.getLoggedUser().login}</a>
+						</p>
+						<p>52 users already connected</p>
+						<p:commandButton id="butLogout" icon="fa fa-sign-out" 
+										actionListener="#{userControlerBean.logout()}"
+										update="loginLogoutBlock registerBlock"/>
+					</h:form >
 
-
-
-
-				</div>
+				</p:outputPanel>
 			</div>
 
 			<div class="ui-grid-row">

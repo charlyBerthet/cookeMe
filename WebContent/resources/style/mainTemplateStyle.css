@@ -21,3 +21,10 @@ div{
 .nav-header-button{
 	margin-top: 15px;
 }
+
+.nav-header-login{
+	margin-right:15px;
+}
+.nav-header-login input, .nav-header-login button{
+	margin-bottom:5px;
+}

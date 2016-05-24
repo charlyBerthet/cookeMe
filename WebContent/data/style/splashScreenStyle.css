@@ -4,7 +4,18 @@
 	width:100vw;
 	height:100vh;
 	text-align:center;
+	position:relative;
+	line-height:100vh;
 }
 #logo{
-	width:40%;
+	width:30%;
+	vertical-align:middle;
+	display:inline-block;
+}
+#arrow{
+	width:15%;
+	vertical-align:middle;
+	display:inline-block;
+	margin-top:7%;
+	margin-left:2%;
 }

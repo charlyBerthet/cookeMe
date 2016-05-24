@@ -48,8 +48,7 @@ public class RecipeModel implements Serializable{
 		this.type = type;
 	}
 	public RecipeModel(){}
-	public RecipeModel(String title, String description, int expertise,
-			int nbpeople, int duration, String type) {
+	public RecipeModel(String title, String description, int expertise,int nbpeople, int duration, String type) {
 		super();
 		this.title = title;
 		this.description = description;

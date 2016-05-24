@@ -2,7 +2,8 @@ package main;
 
 import java.util.List;
 
-import model.RecipeModelBean;
+import model.RecipeModel;
+
 import model.UserModelBean;
 import dao.fabric.DaoFabric;
 import dao.instance.RecipesDao;
@@ -13,17 +14,17 @@ public class Launcher {
 		UserDao userDao=DaoFabric.getInstance().createUserDao();
 		RecipesDao recipesDao=DaoFabric.getInstance().createRecipesDao();
 		UserModelBean user1=new UserModelBean("Doe","John",55,"jdoe","pwd");
-		RecipeModelBean recipe1=new RecipeModelBean("Fish Salad","bla bla bal bla",5, 180, 10,"salad");
-		RecipeModelBean recipe2=new RecipeModelBean("Fresh Meat","bla bla bal bla",1, 20, 1,"meat");
+		RecipeModel recipe1=new RecipeModel("Fish Salad","bla bla bal bla",5, 180, 10,"salad");
+		RecipeModel recipe2=new RecipeModel("Fresh Meat","bla bla bal bla",1, 20, 1,"meat");
 		userDao.addUser(user1);
 		recipesDao.addRecipe(recipe1);
 		recipesDao.addRecipe(recipe2);
 		List<UserModelBean> userList=userDao.getAllUser();
-		List<RecipeModelBean> recipeList=recipesDao.getAllRecipes();
+		List<RecipeModel> recipeList=recipesDao.getAllRecipes();
 		for(UserModelBean userTmp:userList){
 			System.out.println("User added:"+userTmp);
-			}
-		for(RecipeModelBean recipeTmp:recipeList){
+			}	
+		for(RecipeModel recipeTmp:recipeList){
 			System.out.println("User added:"+recipeTmp);
 			}
 		}

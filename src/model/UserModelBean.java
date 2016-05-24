@@ -17,7 +17,7 @@ public class UserModelBean implements Serializable {
 
 	public UserModelBean(){}
 
-	public UserModelBean(String lastname, String surname, String email, String login, String pwd, int age) {
+	public UserModelBean(String surname, String lastname, String email, String login, String pwd, int age) {
 		this.lastname = lastname;
 		this.surname = surname;
 		this.email = email;

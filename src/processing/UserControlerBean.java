@@ -19,9 +19,11 @@ import dao.instance.UserDao;
 @ApplicationScoped // Utilisation de application scope afin d'offrir un point d'entrée unique à l'ensemble des clients
 public class UserControlerBean implements Serializable{
 	private UserDao userDao;
+	
 	public UserControlerBean() {
 		this.userDao=DaoFabric.getInstance().createUserDao();
 	}
+	
 	public boolean checkUser(LoginBean loginBean){
 		UserModelBean user = this.userDao.checkUser(loginBean.getLogin(),
 				loginBean.getPwd());
@@ -48,9 +50,40 @@ public class UserControlerBean implements Serializable{
 
 	
 	public void checkAndAddUser(UserSubmissionModelBean userSubmitted){
-		//Vérifier les propriétés de l'utilisateur
+
+			this.userDao.addUser(userSubmitted);
+
 		//TODO
 		//ajout de l'utilisateur à la base de données
-		this.userDao.addUser(userSubmitted);
+		
+	}
+
+	
+	
+	public boolean isLogged(){
+		ExternalContext externalContext =
+				FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		UserModelBean user = (UserModelBean)sessionMap.get("loggedUser");
+		if(user == null) return false;
+		if(user.getLogin() == null) return false;
+		return true;
+	}
+	
+	
+	public void logout(){
+		ExternalContext externalContext =
+				FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		sessionMap.put("loggedUser", null);
+	}
+	
+	
+	public UserModelBean getLoggedUser(){
+		ExternalContext externalContext =
+				FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		UserModelBean user = (UserModelBean)sessionMap.get("loggedUser");
+		return user;
 	}
 }

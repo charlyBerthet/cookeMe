@@ -60,10 +60,10 @@ public class UserDao {
 			// create connection
 			connection= java.sql.DriverManager.getConnection("jdbc:mysql://"+dB_HOST+":"+dB_PORT+"/"+dB_NAME,dB_USER,dB_PWD);
 			query =  connection.createStatement();
-			String sql="SELECT surname, lastname, login, pwd, age FROM User";
+			String sql="SELECT surname, lastname, login, email, pwd, age FROM user";
 			ResultSet result = query.executeQuery(sql);
 			while(result.next()){
-				userList.add(new UserModelBean(result.getString("lastname"), result.getString("surname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age")));
+				userList.add(new UserModelBean(result.getString("surname"), result.getString("lastname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age")));
 			}
 			query.close();
 			connection.close();
@@ -98,20 +98,26 @@ public class UserDao {
 	}
 
 	public static void main(String[] main){
-		UserModelBean userToAdd 	= new UserModelBean("benjamin","grenier","benji2092@hotmail.fr","benji2092","test",24);
+		UserModelBean userToAdd 	= new UserModelBean("Charly","Berthet","charly.berthet@cpe.fr","charly","test",23);
 		UserModelBean userToCheck 	= new UserModelBean("benjamin","grenier","benji2092@hotmail.fr","benji2092","test",24);
 
 		UserDao userDao = DaoFabric.getInstance().createUserDao();
 
 		//Subscription
-//		userDao.addUser(userToAdd);
+		//userDao.addUser(userToAdd);
 		UserModelBean userCheck = userDao.checkUser(userToCheck.getLogin(),userToCheck.getPwd());
 		//Check user
 		if(userCheck != null){
-			System.out.println("user inscrit : "+userCheck.getEmail());
+			System.out.println("user inscrit : "+userCheck.toString());
 
 		}else{
 			System.out.println("user non inscrit");
+		}
+
+		//Get All user
+		System.out.println("------------ Affichage des user en base --------------");
+		for(UserModelBean user :userDao.getAllUser()){
+			System.out.println(user.toString());
 		}
 
 	}

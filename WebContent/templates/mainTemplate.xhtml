@@ -31,7 +31,7 @@
 
 				<!-- REGISTER -->
 				<p:outputPanel id="registerBlock" class="ui-grid-col-2 nav-header-button">
-					<h:form   rendered="#{!userControlerBean.isLogged()}">
+					<h:form rendered="#{!userControlerBean.isLogged()}">
 						<p:button icon="ui-icon-plus"></p:button>
 						Become member
 					</h:form>
@@ -42,10 +42,10 @@
 				<p:outputPanel style="display:block"
 					class="ui-grid-col-3 nav-header-button nav-header-login"
 					id="loginLogoutBlock">
-
+					<p:growl showDetail="true" sticky="true" />
 					<!-- IS NOT LOGGED -->
 					<h:form  rendered="#{!userControlerBean.isLogged()}">
-						<p:growl showDetail="true" sticky="true" />
+						
 						<div class="ui-grid ui-grid-responsive">
 							<div class="ui-grid-row">
 								<div class="ui-grid-col-12">

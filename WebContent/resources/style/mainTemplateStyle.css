@@ -30,3 +30,10 @@ div{
 .nav-header-login input, .nav-header-login button{
 	margin-bottom:5px;
 }
+
+div[id="forma:growl-error_container"] > div {
+    background-color: red !important;
+}
+div[id="forma:growl-success_container"] > div{
+    background-color: green !important;
+}

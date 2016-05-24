@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import dao.fabric.DaoFabric;
 import model.UserModelBean;
 
 
@@ -32,13 +33,14 @@ public class UserDao {
 		try{
 			// create connection
 			connection= java.sql.DriverManager.getConnection("jdbc:mysql://"+dB_HOST+":"+dB_PORT+"/"+dB_NAME,dB_USER, dB_PWD);
-			String sql="INSERT INTO User (surname, lastname, email,login, pwd, age) VALUES(?, ?, ?, ?, ?, ?)";
+			String sql="INSERT INTO user(surname, lastname, email, login, pwd, age) VALUES(?, ?, ?, ?, ?, ?)";
 			query =  connection.prepareStatement(sql);
 			query.setString(1, user.getSurname());
 			query.setString(2, user.getLastname());
-			query.setString(3, user.getLogin());
-			query.setString(4, user.getPwd());
-			query.setInt(5, user.getAge());
+			query.setString(3,user.getEmail());
+			query.setString(4, user.getLogin());
+			query.setString(5, user.getPwd());
+			query.setInt(6, user.getAge());
 			query.executeUpdate();
 			//connection.commit();
 			query.close();
@@ -72,22 +74,22 @@ public class UserDao {
 	}
 
 	public UserModelBean checkUser(String login, String pwd) {
-		PreparedStatement query;
+		PreparedStatement preparedStatement;
 		UserModelBean userCheck =null;
 		try{
 			// create connection
 			connection= java.sql.DriverManager.getConnection("jdbc:mysql://"+dB_HOST+":"+dB_PORT+"/"+dB_NAME,dB_USER, dB_PWD);
-			String sql="SELECT * FROM User WHERE login=? AND pwd=?";
-			query =  connection.prepareStatement(sql);
-			query.setString(1, login);
-			query.setString(2, pwd);
+			String sql="SELECT * FROM user where login = ? and pwd = ?";
+			preparedStatement =  connection.prepareStatement(sql);
+			preparedStatement.setString(1, login);
+			preparedStatement.setString(2, pwd);
 			
-			ResultSet result = query.executeQuery(sql);
+			ResultSet result = preparedStatement.executeQuery();
 			
 			if(result.next()){
 				userCheck = new UserModelBean(result.getString("lastname"), result.getString("surname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age"));
 			}
-			query.close();
+			preparedStatement.close();
 			connection.close();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -95,6 +97,24 @@ public class UserDao {
 		return userCheck;
 	}
 
+	public static void main(String[] main){
+		UserModelBean userToAdd 	= new UserModelBean("benjamin","grenier","benji2092@hotmail.fr","benji2092","test",24);
+		UserModelBean userToCheck 	= new UserModelBean("benjamin","grenier","benji2092@hotmail.fr","benji2092","test",24);
+
+		UserDao userDao = DaoFabric.getInstance().createUserDao();
+
+		//Subscription
+//		userDao.addUser(userToAdd);
+		UserModelBean userCheck = userDao.checkUser(userToCheck.getLogin(),userToCheck.getPwd());
+		//Check user
+		if(userCheck != null){
+			System.out.println("user inscrit : "+userCheck.getEmail());
+
+		}else{
+			System.out.println("user non inscrit");
+		}
+
+	}
 }
 
 

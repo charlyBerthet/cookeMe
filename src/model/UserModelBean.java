@@ -65,10 +65,18 @@ public class UserModelBean implements Serializable {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
-		return"[SURNAME]:"+this.getSurname()+",[LASTNAME]:"+this.getLastname()+",[AGE]:"+this.getAge()+",[LOGIN]:"+this.getLogin()+",[PWD]:"+this.getPwd();
+		return"[SURNAME]:"+this.getSurname()+",[LASTNAME]:"+this.getLastname()+",[AGE]:"+this.getAge()+"[EMAIL] : "+this.getEmail()+",[LOGIN]:"+this.getLogin()+",[PWD]:"+this.getPwd();
 	}
 
 }

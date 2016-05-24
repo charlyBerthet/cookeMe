@@ -16,3 +16,8 @@ div{
     transform: rotate(-17deg);
     font-size:1.5rem;
 }
+
+
+.nav-header-button{
+	margin-top: 15px;
+}

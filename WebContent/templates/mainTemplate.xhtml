@@ -12,31 +12,45 @@
 
 
 <h:body>
+
 	<p:outputPanel>
 		<div class="ui-grid ui-grid-responsive">
 			<div class="ui-grid-row">
+			
+				<!-- ACTIVITY NAME -->
 				<div class="ui-grid-col-3" id="activityTitle">
 					<ui:insert name="activityTitle">Titre de l'activité</ui:insert>
 				</div>
+				
+				<!-- EMPTY SPACE -->
 				<div class="ui-grid-col-4"></div>
-				<div class="ui-grid-col-3" >
+				
+				
+				<!-- REGISTER -->
+				<div class="ui-grid-col-3 nav-header-button" >
 					<p:button  icon="ui-icon-plus"></p:button>
 					Become a member
 				</div>
-				<div class="ui-grid-col-3" style="background-color:pink">
-					login
+
+
+				<!-- LOGIN -->
+				<div class="ui-grid-col-3 nav-header-button" style="background-color:pink">
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row">
+						</div>
+					</div>
 				</div>
 			</div>
 			
 			<div class="ui-grid-row">
-				<div class="ui-grid-col-12" style="background-color:black">
+				<div class="ui-grid-col-12" style="background-color:yellow">
 					<ui:insert name="activityContent">Contenu de l'activité</ui:insert>
 				</div>
 			</div>
 			
 			
 			<div class="ui-grid-row">
-				<div class="ui-grid-col-12" style="background-color:black">
+				<div class="ui-grid-col-12" style="background-color:green">
 					<!-- TODO<ui:include src="/WEB-INF/include.xhtml" /> -->
 				</div>
 			</div>

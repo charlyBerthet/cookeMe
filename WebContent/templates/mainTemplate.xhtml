@@ -1,0 +1,47 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<h:outputStylesheet library="style" name="mainTemplateStyle.css"  />
+</h:head>
+
+
+<h:body>
+	<p:outputPanel>
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-3" id="activityTitle">
+					<ui:insert name="activityTitle">Titre de l'activité</ui:insert>
+				</div>
+				<div class="ui-grid-col-4"></div>
+				<div class="ui-grid-col-3" class="userRegi">
+					<p:button  icon="ui-icon-plus"></p:button>
+					Become a member
+				</div>
+				<div class="ui-grid-col-3" style="background-color:pink">
+					login
+				</div>
+			</div>
+			
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-12" style="background-color:black">
+					<ui:insert name="activityContent">Contenu de l'activité</ui:insert>
+				</div>
+			</div>
+			
+			
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-12" style="background-color:black">
+					<!-- TODO<ui:include src="/WEB-INF/include.xhtml" /> -->
+				</div>
+			</div>
+		</div>
+	</p:outputPanel>
+
+</h:body>
+</html>

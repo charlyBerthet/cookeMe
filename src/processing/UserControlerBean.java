@@ -1,5 +1,6 @@
 package processing;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import javax.faces.bean.ApplicationScoped;
@@ -15,7 +16,7 @@ import dao.instance.UserDao;
 
 @ManagedBean
 @ApplicationScoped // Utilisation de application scope afin d'offrir un point d'entrée unique à l'ensemble des clients
-public class UserControlerBean {
+public class UserControlerBean implements Serializable{
 	private UserDao userDao;
 	public UserControlerBean() {
 		this.userDao=DaoFabric.getInstance().createUserDao();

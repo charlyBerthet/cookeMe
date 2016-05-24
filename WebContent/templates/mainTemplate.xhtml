@@ -30,32 +30,34 @@
 				
 				<!-- REGISTER -->
 				<div class="ui-grid-col-2 nav-header-button" >
-					<p:button  icon="ui-icon-plus"></p:button>
+					<p:button icon="ui-icon-plus"></p:button>
 					Become member
 				</div>
 
 
 				<!-- LOGIN -->
 				<div class="ui-grid-col-2 nav-header-button nav-header-login">
-					<div class="ui-grid ui-grid-responsive">
-						<div class="ui-grid-row">
-							<div class="ui-grid-col-12">
-								<p:inputText id="login" />
-								<p:watermark for="login" value="Login" />
+					<h:form>
+						<div class="ui-grid ui-grid-responsive">
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-12">
+									<p:inputText id="login" value="#{loginBean.login}" />
+									<p:watermark for="login" value="Login" />
+								</div>
+							</div>
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-12">
+									<p:password id="password"  value="#{loginBean.pwd}" />
+									<p:watermark for="password" value="Password" />
+								</div>
+							</div>
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-12">
+									<h:commandButton id="butLogin" icon="ui-icon-check" type="submit" action="#{userControlerBean.checkUser(loginBean)}" />
+								</div>
 							</div>
 						</div>
-						<div class="ui-grid-row">
-							<div class="ui-grid-col-12">
-								<p:password id="password" feedback="true" inline="true" />
-								<p:watermark for="password" value="Password" />
-							</div>
-						</div>
-						<div class="ui-grid-row">
-							<div class="ui-grid-col-12">
-								<p:button icon="ui-icon-check"></p:button>
-							</div>
-						</div>
-					</div>
+					</h:form>
 				</div>
 			</div>
 			

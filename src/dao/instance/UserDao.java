@@ -32,7 +32,7 @@ public class UserDao {
 		try{
 			// create connection
 			connection= java.sql.DriverManager.getConnection("jdbc:mysql://"+dB_HOST+":"+dB_PORT+"/"+dB_NAME,dB_USER, dB_PWD);
-			String sql="INSERT INTO User (surname, lastname, login, pwd, age) VALUES(?, ?, ?, ?, ?)";
+			String sql="INSERT INTO User (surname, lastname, email,login, pwd, age) VALUES(?, ?, ?, ?, ?, ?)";
 			query =  connection.prepareStatement(sql);
 			query.setString(1, user.getSurname());
 			query.setString(2, user.getLastname());
@@ -61,7 +61,7 @@ public class UserDao {
 			String sql="SELECT surname, lastname, login, pwd, age FROM User";
 			ResultSet result = query.executeQuery(sql);
 			while(result.next()){
-				userList.add(new UserModelBean(result.getString("lastname"), result.getString("surname"), result.getInt("age"), result.getString("login"), result.getString("pwd")));
+				userList.add(new UserModelBean(result.getString("lastname"), result.getString("surname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age")));
 			}
 			query.close();
 			connection.close();
@@ -85,7 +85,7 @@ public class UserDao {
 			ResultSet result = query.executeQuery(sql);
 			
 			if(result.next()){
-				userCheck = new UserModelBean(result.getString("lastname"), result.getString("surname"), result.getInt("age"), result.getString("login"), result.getString("pwd"));
+				userCheck = new UserModelBean(result.getString("lastname"), result.getString("surname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age"));
 			}
 			query.close();
 			connection.close();

@@ -18,16 +18,20 @@ a{
 	margin-right: 2%;
 	margin-left: 3%;
 	margin-top : 10%;
-	
 	height: 80vh;
+	border-radius: 20px;
 }
 #menu1{
 	background-color: orange;
+	box-shadow: 10px 7px 24px -4px rgba(0,0,0,0.75);
+	
 }
 #menu2{
 	background-color: blue;
+	box-shadow: 10px 7px 24px -4px rgba(0,0,0,0.75);
+
 }
 #menu3{
 	background-color: green;
-	
+	box-shadow: 10px 7px 24px -4px rgba(0,0,0,0.75);
 }

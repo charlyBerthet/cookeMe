@@ -11,9 +11,7 @@ div{
 	line-height:150px;
 	vertical-align:middle;
 	text-align:center;
-	-ms-transform: rotate(-17deg); /* IE 9 */
-    -webkit-transform: rotate(-17deg); /* Chrome, Safari, Opera */
-    transform: rotate(-17deg);
+	
     font-size:1.5rem;
 }
 
@@ -23,7 +21,11 @@ div{
 }
 
 .nav-header-login{
-	margin-right:15px;
+	padding-right:35px;
+	text-align:right;
+}
+.nav-header-login input{
+	width:100%;
 }
 .nav-header-login input, .nav-header-login button{
 	margin-bottom:5px;

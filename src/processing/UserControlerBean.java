@@ -34,16 +34,14 @@ public class UserControlerBean implements Serializable{
 				Map<String, Object> sessionMap = externalContext.getSessionMap();
 				//place l'utilisateur dans l'espace de mémoire de JSF
 				sessionMap.put("loggedUser", user);
-				//redirect the current page
 				
-		         
-		        context.addMessage(null, new FacesMessage("Successful",  "Connection success") );
+		        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful",  "Connection success") );
 		        return true;
 			}else{
 				throw new Exception("User not found");
 			}
 		}catch(Exception e){
-			context.addMessage(null, new FacesMessage("Hmmm....",  "Connection fail") );
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hmmm....",  "Connection fail") );
 			return false;
 		}
 	}

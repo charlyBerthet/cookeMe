@@ -20,25 +20,26 @@
             
  
             <h:outputLabel for="lastname" value="Lastname:" style="font-weight:bold"/>                    
-            <p:inputText id="lastname" value="#{userSubmissionModelBean.lastname}" label="Lastname">
+            <p:inputText id="lastname" value="#{userSubmissionModelBean.lastname}" required="true" label="Lastname">
             </p:inputText>
             <p:message for="lastname" />
             
  
             <h:outputLabel for="age" value="Age:" style="font-weight:bold"/>                    
-            <p:inputText id="age" value="#{userSubmissionModelBean.age}" converterMessage="Not an age">
+            <p:inputText id="age" value="#{userSubmissionModelBean.age}" required="true" label="Age">
+            <f:validateDoubleRange minimum="0" maximum="99" />
             </p:inputText>
             <p:message for="age" />
             
  
             <h:outputLabel for="email" value="Email Adress:" style="font-weight:bold"/>                   
-            <p:inputText id="email" value="#{userSubmissionModelBean.email}" label="Email">
+            <p:inputText id="email" value="#{userSubmissionModelBean.email}" required="true" label="Email">
             </p:inputText>
             <p:message for="email" />
             
 
             <h:outputLabel for="login" value="Login" style="font-weight:bold"/>                 
-            <p:inputText id="login" value="#{userSubmissionModelBean.login}" label="Login">
+            <p:inputText id="login" value="#{userSubmissionModelBean.login}" required="true" label="Login">
             </p:inputText>
             <p:message for="login" />
             

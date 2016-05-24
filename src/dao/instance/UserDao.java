@@ -77,7 +77,7 @@ public class UserDao {
 		try{
 			// create connection
 			connection= java.sql.DriverManager.getConnection("jdbc:mysql://"+dB_HOST+":"+dB_PORT+"/"+dB_NAME,dB_USER, dB_PWD);
-			String sql="SELECT * FROM User WHERE login=? AND pwd =?";
+			String sql="SELECT * FROM User WHERE login=? AND pwd=?";
 			query =  connection.prepareStatement(sql);
 			query.setString(1, login);
 			query.setString(2, pwd);

@@ -5,11 +5,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-<h:outputStylesheet library="style" name="mainTemplateStyle.css"  />
-<ui:insert name="cssBlock"></ui:insert>
-<ui:insert name="jsBlock"></ui:insert>
+	<h:outputStylesheet library="style" name="mainTemplateStyle.css" />
+	<ui:insert name="cssBlock"></ui:insert>
+	<ui:insert name="jsBlock"></ui:insert>
 </h:head>
 
 
@@ -18,18 +19,18 @@
 	<p:outputPanel>
 		<div class="ui-grid ui-grid-responsive">
 			<div class="ui-grid-row">
-			
+
 				<!-- ACTIVITY NAME -->
 				<div class="ui-grid-col-3" id="activityTitle">
 					<ui:insert name="activityTitle">Titre de l'activité</ui:insert>
 				</div>
-				
+
 				<!-- EMPTY SPACE -->
 				<div class="ui-grid-col-5"></div>
-				
-				
+
+
 				<!-- REGISTER -->
-				<div class="ui-grid-col-2 nav-header-button" >
+				<div class="ui-grid-col-2 nav-header-button">
 					<p:button icon="ui-icon-plus"></p:button>
 					Become member
 				</div>
@@ -37,37 +38,56 @@
 
 				<!-- LOGIN -->
 				<div class="ui-grid-col-2 nav-header-button nav-header-login">
-					<h:form>
-						<div class="ui-grid ui-grid-responsive">
-							<div class="ui-grid-row">
-								<div class="ui-grid-col-12">
-									<p:inputText id="login" value="#{loginBean.login}" />
-									<p:watermark for="login" value="Login" />
+
+					<c:choose>
+						<!-- IS NOT LOGGED -->
+						<c:when test="#{userModelBean}">
+							<h:form>
+								<p:growl id="growlLogin" showDetail="true" sticky="true" />
+								<div class="ui-grid ui-grid-responsive">
+									<div class="ui-grid-row">
+										<div class="ui-grid-col-12">
+											<p:inputText id="login" value="#{loginBean.login}" />
+											<p:watermark for="login" value="Login" />
+										</div>
+									</div>
+									<div class="ui-grid-row">
+										<div class="ui-grid-col-12">
+											<p:password id="password" value="#{loginBean.pwd}" />
+											<p:watermark for="password" value="Password" />
+										</div>
+									</div>
+									<div class="ui-grid-row">
+										<div class="ui-grid-col-12">
+											<p:commandButton id="butLogin" icon="ui-icon-check"
+												type="submit"
+												action="#{userControlerBean.checkUser(loginBean)}"
+												update="growlLogin" />
+										</div>
+									</div>
 								</div>
-							</div>
-							<div class="ui-grid-row">
-								<div class="ui-grid-col-12">
-									<p:password id="password"  value="#{loginBean.pwd}" />
-									<p:watermark for="password" value="Password" />
-								</div>
-							</div>
-							<div class="ui-grid-row">
-								<div class="ui-grid-col-12">
-									<h:commandButton id="butLogin" icon="ui-icon-check" type="submit" action="#{userControlerBean.checkUser(loginBean)}" />
-								</div>
-							</div>
-						</div>
-					</h:form>
+							</h:form>
+						</c:when>
+
+						<!-- IS LOGGED -->
+						<c:otherwise>
+							<p>some.test is not true</p>
+						</c:otherwise>
+					</c:choose>
+
+
+
+
 				</div>
 			</div>
-			
+
 			<div class="ui-grid-row">
-				<div class="ui-grid-col-12" style="background-color:yellow">
+				<div class="ui-grid-col-12" style="background-color: yellow">
 					<ui:insert name="activityContent">Contenu de l'activité</ui:insert>
 				</div>
 			</div>
-			
-			
+
+
 			<div class="ui-grid-row">
 				<div class="ui-grid-col-12">
 					<ui:include src="footer.xhtml" />

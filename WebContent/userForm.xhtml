@@ -15,7 +15,7 @@
  
         <h:panelGrid id="grid" columns="3" cellpadding="5">
             <h:outputLabel for="surname" value="Surname:" style="font-weight:bold"/>                    
-            <p:inputText id="surname" value="#{}" required="true" validatorMessage="Entrez que des lettres">
+            <p:inputText id="surname" value="#{userSubmissionModelBean.surname}" required="true" validatorMessage="Entrez que des lettres">
             <f:validateRegex pattern="[a-zA-Z]+"></f:validateRegex>
             </p:inputText>
             <p:message for="surname" />

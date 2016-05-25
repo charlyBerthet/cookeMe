@@ -25,37 +25,36 @@ public class UserControlerBean implements Serializable{
 	}
 	
 	public boolean checkUser(LoginBean loginBean){
-		UserModelBean user = this.userDao.checkUser(loginBean.getLogin(),
-				loginBean.getPwd());
-		FacesContext context = FacesContext.getCurrentInstance();
+		boolean userExist = false;
+		UserModelBean user = this.userDao.checkUser(loginBean.getLogin(),loginBean.getPwd());
+		FacesContext context	=	FacesContext.getCurrentInstance();
+
 		try{
 			if( user!=null){
 				//récupère l'espace de mémoire de JSF
-				ExternalContext externalContext =
-						FacesContext.getCurrentInstance().getExternalContext();
-				Map<String, Object> sessionMap = externalContext.getSessionMap();
+				ExternalContext externalContext =	FacesContext.getCurrentInstance().getExternalContext();
+				Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
 				//place l'utilisateur dans l'espace de mémoire de JSF
 				sessionMap.put("loggedUser", user);
 				
 		        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful",  "Connection success") );
-		        return true;
+		        userExist = true;
 			}else{
 				throw new Exception("User not found");
 			}
 		}catch(Exception e){
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hmmm....",  "Connection fail") );
-			return false;
 		}
+		return userExist;
 	}
 
 	
 	public void checkAndAddUser(UserSubmissionModelBean userSubmitted){
 
+		if(userDao.checkUser(userSubmitted.getLogin(),userSubmitted.getPwd()) != null)
 			this.userDao.addUser(userSubmitted);
 
-		//TODO
-		//ajout de l'utilisateur à la base de données
-		
+		//TODO : redirection en cas d'erreur ?
 	}
 
 	

@@ -18,20 +18,25 @@ import dao.instance.RecipesDao;
 @ManagedBean
 @ApplicationScoped
 public class RecipeControlerBean implements Serializable{
+
 	private RecipesDao recipeDao;
+
 	public RecipeControlerBean() {
 		this.recipeDao=DaoFabric.getInstance().createRecipesDao();
 	}
+
 	public void loadAllRecipe(){
+
 		List<RecipeModel> list = this.recipeDao.getAllRecipes();
 		RecipeListModelBean recipeList=new RecipeListModelBean();
+
 		for(RecipeModel recipe:list){
 			recipeList.addRecipeList(recipe);
 		}
 		//récupère l'espace de mémoire de JSF
-		ExternalContext externalContext =
-				FacesContext.getCurrentInstance().getExternalContext();
-		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		ExternalContext externalContext =	FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
+
 		//place la liste de recette dans l'espace de mémoire de JSF
 		sessionMap.put("recipeList", recipeList);
 	}
@@ -48,7 +53,15 @@ public class RecipeControlerBean implements Serializable{
 		//TODO effectuer une recherche des recettes répondant aux critères passés en
 		//parametre, récupérer la liste des recettes correspondantes et demander à
 		//recipeResultList.xhtml d’afficher les recettes trouvées
-		
+
+		// Get recipe list
+		List<RecipeModel> recipes = this.recipeDao.searchRecipes(recipe.getDuration(),recipe.getExpertise(),recipe.getNbpeople(),recipe.getType());
+
+		RecipeListModelBean recipeListModelBean = new RecipeListModelBean();
+
+		for (RecipeModel r : recipes)
+			recipeListModelBean.addRecipeList(r);
+
 		return "recipeResultList.xhtml";
 	}
 	

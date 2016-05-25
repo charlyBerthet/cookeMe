@@ -1,30 +1,56 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
-<head>
-<title>title</title>
-</head>
-<body>
-	<h1>Add Recipe</h1>
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="templates/mainTemplate.xhtml">
+<ui:define name="activityTitle">Search recipe</ui:define>
+<ui:define name="activityContent">
 	<h:form>
-		<table border="0">
-			<tr>
-				<td>Title</td>
-				<td><h:inputText id="recipeTitle"
-						value="#{searchRecipeBean.title}" required="true">
-					</h:inputText></td>
-			</tr>
-			//TODO réaliser les formulaires de saisie pour l’ensemble des
-			paramètres
-			<tr>
-				<td></td>
-				<td>//TODO A l’aide de h:commandButton demander l’execution de
-					la recherché à votre application</td>
-			</tr>
-		</table>
+		<p:panel header="Validate">
+			<p:messages autoUpdate="true"/>
+
+			<div class="ui-grid" id="grid">
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-6">
+						<h3>For how many people :</h3>
+						<h:panelGrid columns="1" style="margin-bottom: 10px">
+							<h:outputText id="outputNbPeople" value="#{sliderView.number2}" />
+							<h:inputHidden id="nbPeople" value="#{sliderView.number2}" />
+							<p:slider for="nbPeople" display="outputNbPeople" style="width: 200px" displayTemplate="{value}" maxValue="20"/>
+						</h:panelGrid>
+					</div>
+					<div class="ui-grid-col-12">
+						<h3>Preparation duration (min):</h3>
+						<p:spinner id="stepDuration" value="#{spinnerView.number2}" stepFactor="30" />
+					</div>
+				</div>
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-6">
+						<h3>Cook expertise:</h3>
+						<p:rating value="#{ratingView.rating1}" />
+					</div>
+					<div class="ui-grid-col-12">
+						<h3>Cook type :</h3>
+						<p:selectOneMenu id="recipeType" value="#{selectOneMenuView.recipeType}" style="width:125px">
+							<f:selectItem itemLabel="Select One" itemValue="" />
+							<f:selectItem itemLabel="Salad" itemValue="salad" />
+							<f:selectItem itemLabel="Meal" itemValue="meal" />
+							<f:selectItem itemLabel="Fish" itemValue="fish" />
+							<f:selectItem itemLabel="Dessert" itemValue="dessert" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+
+			</div>
+
+			<p:commandButton  action="#{userControlerBean.checkAndAddUser(userSubmissionModelBean)}" value="Search" icon="ui-icon-check" validateClient="true" style="margin-right:10px"/>
+
+		</p:panel>
 	</h:form>
-</body>
+
+</ui:define>
+
+</ui:composition>
 </html>

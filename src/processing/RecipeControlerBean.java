@@ -53,9 +53,8 @@ public class RecipeControlerBean implements Serializable{
 	}
 	
 	
-	public String displayRecipeDetail(RecipeModel recipe){
+	public void displayRecipeDetail(RecipeModel recipe){
 		//TODO demander à recipeDetail.jsf d’afficher les details de la recette passée en
 		//paramètre
-		return "recipeDetail.jsf";
 	}
 }

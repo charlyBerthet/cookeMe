@@ -10,40 +10,39 @@
 	<ui:define name="activityTitle">Recipes</ui:define>
 
 	<ui:define name="activityContent">
-		<p:dataGrid var="recipe" value="#{}" columns="3" layout="grid"
-			rows="12" paginator="true" id="recipes"
+		<p:dataGrid var="recipe" value="#{recipes}" columns="3" layout="grid"
+			rows="12" paginator="true" id="recipesGrid"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="4,8,12">
 
 			<f:facet name="header">
-            Result List
-        </f:facet>
+            	Result List
+        	</f:facet>
 
-			<p:panel style="text-align:center">
-				<h:panelGrid columns="1" style="width:100%">
+			<p:panel header="#{recipe.title}" style="text-align:center">
+				<div>
+						<p:panelGrid columns="2" style="width:50%;">
+							<i class="fa fa-cutlery fa-lg" style="text-align: right;"></i>
+							<h:outputText value="#{recipe.type}" />
 
-				</h:panelGrid>
+							<i class="fa fa-clock-o fa-lg"></i>
+							<h:outputText value="#{recipe.duration}" />
+
+
+							<i class="fa fa-users fa-lg"></i>
+							<h:outputText value="#{recipe.nbpeople}" />
+
+							<i class="fa fa-pencil-square-o fa-lg"></i>
+							<p:rating class="ui-grid-col-9" value="#{recipe.expertise}" readonly="true" />
+
+						</p:panelGrid>
+
+						<p:outputPanel style="text-align: right">#{recipe.description}</p:outputPanel>
+				</div>
+
 			</p:panel>
 
 		</p:dataGrid>
-
-
-
-		<p:panelGrid columns="2" style="width: 10%;">
-			<i class="fa fa-cutlery fa-lg" style="text-align: right;"></i>
-			<h:outputText value="Content" />
-
-			<i class="fa fa-clock-o fa-lg"></i>
-			<h:outputText value="Content" />
-
-
-			<i class="fa fa-users fa-lg"></i>
-			<h:outputText value="Content" />
-
-			<i class="fa fa-pencil-square-o fa-lg"></i>
-			<p:rating class="ui-grid-col-9" value="3" readonly="true" />
-
-		</p:panelGrid>
 	</ui:define>
 </ui:composition>
 </html>

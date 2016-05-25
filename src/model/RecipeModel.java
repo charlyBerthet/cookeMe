@@ -64,7 +64,4 @@ public class RecipeModel implements Serializable{
 				+",[EXPERTISE]:"+this.getExpertise()+",[NBPEOPLE]:"+this.getNbpeople()
 				+",[DURATION]:"+this.getDuration()+",[TYPE]:"+this.getType();
 	}
-	
-	
-	
 }

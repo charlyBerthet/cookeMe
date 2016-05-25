@@ -9,7 +9,8 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<h:outputStylesheet library="style" name="mainTemplateStyle.css" />
-
+	<ui:insert name="cssBlock"></ui:insert>
+	<ui:insert name="cssJs"></ui:insert>
 </h:head>
 
 
@@ -21,7 +22,7 @@
 
 				<!-- ACTIVITY NAME -->
 				<div class="ui-grid-col-3" id="activityTitle">
-					<ui:insert name="activityTitle">Titre de l'activité</ui:insert>
+					<ui:insert name="activityTitle">Activity Title</ui:insert>
 				</div>
 
 				<!-- EMPTY SPACE -->
@@ -83,7 +84,7 @@
 			</div>
 
 			<div class="ui-grid-row">
-				<div class="ui-grid-col-12" style="background-color: yellow">
+				<div class="ui-grid-col-12">
 					<ui:insert name="activityContent">Contenu de l'activité</ui:insert>
 				</div>
 			</div>

@@ -149,6 +149,7 @@ public class RecipesDao {
 			System.out.println(recipeModel.toString());
 		}
 
+		System.out.println("--------Affichage get--------");
 		System.out.println(recipesDao.getRecipeByTitle("Django").toString());
 
 	}

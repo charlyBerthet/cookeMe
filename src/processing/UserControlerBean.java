@@ -36,7 +36,6 @@ public class UserControlerBean implements Serializable{
 				Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
 				//place l'utilisateur dans l'espace de mémoire de JSF
 				sessionMap.put("loggedUser", user);
-				
 		        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful",  "Connection success") );
 		        userExist = true;
 			}else{

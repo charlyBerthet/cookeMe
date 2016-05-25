@@ -1,3 +1,30 @@
+.recipe-detail-content{
+    padding:30px !important;
+}
+.recipe-detail-content hr{
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+.recipe-detail-content .text-center{
+    text-align: center;
+}
 .recipe-detail{
 	padding:10px;
+}
+
+.recipe-detail-block{
+    border:1px solid #AAAAAA;
+    margin:10px !important;
+
+}
+
+.recipe-detail-picture{
+    width:100%;
+}
+.recipe-detail-comment{
+    margin-bottom: 20px;
+}
+
+.recipe-detail-inputs{
+    margin-top:50px;
 }

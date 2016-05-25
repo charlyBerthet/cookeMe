@@ -2,6 +2,7 @@ package processing;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.bean.ApplicationScoped;
@@ -22,7 +23,7 @@ public class RecipeControlerBean implements Serializable{
 		this.recipeDao=DaoFabric.getInstance().createRecipesDao();
 	}
 	public void loadAllRecipe(){
-		ArrayList<RecipeModel> list = this.recipeDao.getAllRecipes();
+		List<RecipeModel> list = this.recipeDao.getAllRecipes();
 		RecipeListModelBean recipeList=new RecipeListModelBean();
 		for(RecipeModel recipe:list){
 			recipeList.addRecipeList(recipe);

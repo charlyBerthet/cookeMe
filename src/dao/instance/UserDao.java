@@ -1,10 +1,8 @@
 package dao.instance;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import dao.fabric.DaoFabric;
 import model.UserModelBean;
@@ -32,7 +30,7 @@ public class UserDao {
 		PreparedStatement query;
 		try{
 			// create connection
-			connection= java.sql.DriverManager.getConnection("jdbc:mysql://"+dB_HOST+":"+dB_PORT+"/"+dB_NAME,dB_USER, dB_PWD);
+			connection= connect();
 			String sql="INSERT INTO user(surname, lastname, email, login, pwd, age) VALUES(?, ?, ?, ?, ?, ?)";
 			query =  connection.prepareStatement(sql);
 			query.setString(1, user.getSurname());
@@ -52,13 +50,13 @@ public class UserDao {
 
 	}
 
-	public ArrayList<UserModelBean> getAllUser(){
+	public List<UserModelBean> getAllUser(){
 		//return value
-		ArrayList<UserModelBean> userList=new ArrayList<UserModelBean>();
-		java.sql.Statement query;
+		List<UserModelBean> userList=new ArrayList<>();
+		Statement query;
 		try{
 			// create connection
-			connection= java.sql.DriverManager.getConnection("jdbc:mysql://"+dB_HOST+":"+dB_PORT+"/"+dB_NAME,dB_USER,dB_PWD);
+			connection= connect();
 			query =  connection.createStatement();
 			String sql="SELECT surname, lastname, login, email, pwd, age FROM user";
 			ResultSet result = query.executeQuery(sql);
@@ -78,7 +76,7 @@ public class UserDao {
 		UserModelBean userCheck =null;
 		try{
 			// create connection
-			connection= java.sql.DriverManager.getConnection("jdbc:mysql://"+dB_HOST+":"+dB_PORT+"/"+dB_NAME,dB_USER, dB_PWD);
+			connection= connect();
 			String sql="SELECT * FROM user where login = ? and pwd = ?";
 			preparedStatement =  connection.prepareStatement(sql);
 			preparedStatement.setString(1, login);
@@ -95,6 +93,16 @@ public class UserDao {
 			e.printStackTrace();
 		}
 		return userCheck;
+	}
+
+	private Connection connect(){
+		Connection connection = null;
+		try {
+			connection = DriverManager.getConnection("jdbc:mysql://"+dB_HOST+":"+dB_PORT+"/"+dB_NAME,dB_USER, dB_PWD);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return connection;
 	}
 
 	public static void main(String[] main){

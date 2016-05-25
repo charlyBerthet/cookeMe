@@ -1,30 +1,49 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
-<head>
-<title>title</title>
-</head>
-<body>
-	<h1>Search Recipts</h1>
-	<h:form>
-		<table>
-			<tr>
-				<th>Title</th>
-				<th>Type</th>
-				<th>Description</th>
-				<th>Expertise</th>
-				<th>Duration</th>
-				<th>NbPeople</th>
-			</tr>
-			//TODO utiliser un outil de JSF permettant d’afficher le contenu
-			d’une liste à chaque itération nous recipe sera la cette courant
-			Afficher l’ensemble des éléments recipe dans le tableau Note utiliser
-			h:commandLink pour permettre de créer un lien vers le détail de la
-			recette courante
-		</table>
-	</h:form>
-</body>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<ui:composition template="templates/mainTemplate.xhtml">
+	<ui:define name="activityTitle">Recipes</ui:define>
+
+	<ui:define name="activityContent">
+		<p:dataGrid var="recipe" value="#{}" columns="3" layout="grid"
+			rows="12" paginator="true" id="recipes"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="4,8,12">
+
+			<f:facet name="header">
+            Result List
+        </f:facet>
+
+			<p:panel style="text-align:center">
+				<h:panelGrid columns="1" style="width:100%">
+
+				</h:panelGrid>
+			</p:panel>
+
+		</p:dataGrid>
+
+
+
+		<p:panelGrid columns="2" style="width: 10%;">
+			<i class="fa fa-cutlery fa-lg" style="text-align: right;"></i>
+			<h:outputText value="Content" />
+
+			<i class="fa fa-clock-o fa-lg"></i>
+			<h:outputText value="Content" />
+
+
+			<i class="fa fa-users fa-lg"></i>
+			<h:outputText value="Content" />
+
+			<i class="fa fa-pencil-square-o fa-lg"></i>
+			<p:rating class="ui-grid-col-9" value="3" readonly="true" />
+
+		</p:panelGrid>
+	</ui:define>
+</ui:composition>
 </html>

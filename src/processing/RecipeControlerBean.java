@@ -53,8 +53,15 @@ public class RecipeControlerBean implements Serializable{
 	}
 	
 	
-	public void displayRecipeDetail(RecipeModel recipe){
-		//TODO demander à recipeDetail.jsf d’afficher les details de la recette passée en
-		//paramètre
+	public String displayRecipeDetail(RecipeModel recipe){
+		System.out.println("COUCOU");
+		System.out.println(recipe);
+		recipe = this.recipeDao.getRecipeByTitle(recipe.getTitle());
+
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		sessionMap.put("recipeDetail", recipe);
+		System.out.println(recipe);
+		return "recipeDetail.xhtml";
 	}
 }

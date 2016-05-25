@@ -83,7 +83,7 @@ public class UserDao {
 			preparedStatement.setString(2, pwd);
 			
 			ResultSet result = preparedStatement.executeQuery();
-			
+
 			if(result.next()){
 				userCheck = new UserModelBean(result.getString("lastname"), result.getString("surname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age"));
 			}

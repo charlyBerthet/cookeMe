@@ -69,8 +69,6 @@ public class RecipeControlerBean implements Serializable{
 	
 	
 	public String displayRecipeDetail(RecipeModel recipe){
-		System.out.println("COUCOU");
-		System.out.println(recipe);
 		recipe = this.recipeDao.getRecipeByTitle(recipe.getTitle());
 
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -79,4 +77,5 @@ public class RecipeControlerBean implements Serializable{
 		System.out.println(recipe);
 		return "recipeDetail.xhtml";
 	}
+
 }

@@ -16,149 +16,159 @@
 
 
 	<ui:define name="activityContent">
-		<div class="ui-grid ui-grid-responsive recipe-detail-content">
+		<p:outputPanel class="ui-grid ui-grid-responsive recipe-detail-content" id="recipe-detail-content">
+
+			<!-- PAS DE RECETTE -->
+			<p:outputPanel rendered="#{recipeDetail.title == null}">
+				Recette non trouvée...
+			</p:outputPanel>
+
+
 			<!-- RECETTE -->
-			<div class="ui-grid-row">
-				<div class="ui-grid-col-3 ui-grid ui-grid-responsive">
-					<div class="ui-grid-row">
-						<!-- DETAIL -->
-						<div class="ui-grid-col-12 ui-grid ui-grid-responsive recipe-detail-block">
-							<div class="ui-grid-row recipe-detail">
-								<div class="ui-grid-col-1"></div>
-								<div class="ui-grid-col-2">
-									<i class="fa fa-cutlery fa-lg"></i>
+			<p:outputPanel rendered="#{recipeDetail.title != null}">
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-3 ui-grid ui-grid-responsive">
+						<div class="ui-grid-row">
+							<!-- DETAIL -->
+							<div class="ui-grid-col-12 ui-grid ui-grid-responsive recipe-detail-block">
+								<div class="ui-grid-row recipe-detail">
+									<div class="ui-grid-col-1"></div>
+									<div class="ui-grid-col-2">
+										<i class="fa fa-cutlery fa-lg"></i>
+									</div>
+									<div class="ui-grid-col-9">#{recipeDetail.type}</div>
 								</div>
-								<div class="ui-grid-col-9">Salade</div>
+								<div class="ui-grid-row recipe-detail">
+									<div class="ui-grid-col-1"></div>
+									<div class="ui-grid-col-2">
+										<i class="fa fa-clock-o fa-lg"></i>
+									</div>
+									<div class="ui-grid-col-9">#{recipeDetail.duration} mins</div>
+								</div>
+								<div class="ui-grid-row recipe-detail">
+									<div class="ui-grid-col-1"></div>
+									<div class="ui-grid-col-2">
+										<i class="fa fa-users fa-lg"></i>
+									</div>
+									<div class="ui-grid-col-9">#{recipeDetail.nbpeople} persons</div>
+								</div>
+								<div class="ui-grid-row recipe-detail">
+									<div class="ui-grid-col-1"></div>
+									<div class="ui-grid-col-2">
+										<i class="fa fa-pencil-square-o fa-lg"></i>
+									</div>
+									<p:rating class="ui-grid-col-9" value="#{recipeDetail.expertise}" readonly="true" />
+								</div>
 							</div>
-							<div class="ui-grid-row recipe-detail">
-								<div class="ui-grid-col-1"></div>
-								<div class="ui-grid-col-2">
-									<i class="fa fa-clock-o fa-lg"></i>
-								</div>
-								<div class="ui-grid-col-9">3 hours</div>
-							</div>
-							<div class="ui-grid-row recipe-detail">
-								<div class="ui-grid-col-1"></div>
-								<div class="ui-grid-col-2">
-									<i class="fa fa-users fa-lg"></i>
-								</div>
-								<div class="ui-grid-col-9">4 persons</div>
-							</div>
-							<div class="ui-grid-row recipe-detail">
-								<div class="ui-grid-col-1"></div>
-								<div class="ui-grid-col-2">
-									<i class="fa fa-pencil-square-o fa-lg"></i>
-								</div>
-								<p:rating class="ui-grid-col-9" value="3" readonly="true" />
+						</div>
+
+						<!-- Picture -->
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-12">
+								<h:graphicImage class="recipe-detail-picture" library="image" name="space-cake.png" title="Recipe picture" />
 							</div>
 						</div>
 					</div>
 
-					<!-- Picture -->
-					<div class="ui-grid-row">
-						<div class="ui-grid-col-12">
-							<h:graphicImage class="recipe-detail-picture" library="image" name="space-cake.png" title="Recipe picture" />
+
+
+
+					<div class="ui-grid-col-9 ui-grid ui-grid-responsive">
+						<!-- TITLE & BACK -->
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-5" style="text-align: center;">
+								#{recipeDetail.title}
+							</div>
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-4" style="text-align: right;">
+								<p:button value="Back">
+								</p:button>
+							</div>
+							<div class="ui-grid-col-1"></div>
+						</div>
+
+						<!-- DESCRIPTION -->
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-10" style="margin-top: 20px;">
+								#{recipeDetail.description}
+							</div>
+							<div class="ui-grid-col-1"></div>
 						</div>
 					</div>
 				</div>
 
 
 
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-3"></div>
+					<div class="ui-grid-col-6"><hr/></div>
+					<div class="ui-grid-col-3"></div>
+				</div>
 
-				<div class="ui-grid-col-9 ui-grid ui-grid-responsive">
-					<!-- TITLE & BACK -->
-					<div class="ui-grid-row">
-						<div class="ui-grid-col-1"></div>
-						<div class="ui-grid-col-5" style="text-align: center;">
-							#{recipeDetail.title}
-						</div>
-						<div class="ui-grid-col-1"></div>
-						<div class="ui-grid-col-4" style="text-align: right;">
-							<p:button value="Back">
-							</p:button>
-						</div>
-						<div class="ui-grid-col-1"></div>
+				<!-- COMMENT -->
+				<div class="ui-grid-row recipe-detail-comment">
+					<div class="ui-grid-col-2 text-center">
+						<i class="fa fa-user fa-3x"></i><br/>
+						bigDady
 					</div>
-
-					<!-- DESCRIPTION -->
-					<div class="ui-grid-row">
-						<div class="ui-grid-col-1"></div>
-						<div class="ui-grid-col-10" style="margin-top: 20px;">
-							Lorem Ipsum est un générateur de faux textes aléatoires. Vous choisissez le nombre de paragraphes, de mots ou de listes. Vous obtenez alors un texte aléatoire que vous pourrez ensuite utiliser librement dans vos maquettes.
-						</div>
-						<div class="ui-grid-col-1"></div>
+					<div class="ui-grid-col-2 text-center">01/02/2013</div>
+					<div class="ui-grid-col-6">
+						Lorem Ipsum est un générateur de faux textes aléatoires. Vous choisissez le nombre de paragraphes, de mots ou de listes. Vous obtenez alors un texte aléatoire que vous pourrez ensuite utiliser librement dans vos maquettes.
+					</div>
+					<div class="ui-grid-col-2 text-center">
+						<p:rating class="ui-grid-col-9" value="4" readonly="true" />
 					</div>
 				</div>
-			</div>
-
-
-
-			<div class="ui-grid-row">
-				<div class="ui-grid-col-3"></div>
-				<div class="ui-grid-col-6"><hr/></div>
-				<div class="ui-grid-col-3"></div>
-			</div>
-
-			<!-- COMMENT -->
-			<div class="ui-grid-row recipe-detail-comment">
-				<div class="ui-grid-col-2 text-center">
-					<i class="fa fa-user fa-3x"></i><br/>
-					bigDady
-				</div>
-				<div class="ui-grid-col-2 text-center">01/02/2013</div>
-				<div class="ui-grid-col-6">
-					Lorem Ipsum est un générateur de faux textes aléatoires. Vous choisissez le nombre de paragraphes, de mots ou de listes. Vous obtenez alors un texte aléatoire que vous pourrez ensuite utiliser librement dans vos maquettes.
-				</div>
-				<div class="ui-grid-col-2 text-center">
-					<p:rating class="ui-grid-col-9" value="4" readonly="true" />
-				</div>
-			</div>
-			<div class="ui-grid-row recipe-detail-comment">
-				<div class="ui-grid-col-2 text-center">
-					<i class="fa fa-user fa-3x"></i><br/>
-					bigMumy
-				</div>
-				<div class="ui-grid-col-2 text-center">04/03/2013</div>
-				<div class="ui-grid-col-6">
-					Lorem Ipsum est un générateur de faux textes aléatoires. Vous choisissez le nombre de paragraphes, de mots ou de listes. Vous obtenez alors un texte aléatoire que vous pourrez ensuite utiliser librement dans vos maquettes.
-				</div>
-				<div class="ui-grid-col-2 text-center">
-					<p:rating class="ui-grid-col-9" value="2" readonly="true" />
-				</div>
-			</div>
-
-
-
-			<!-- INPUT -->
-
-			<h:form class="ui-grid-row recipe-detail-inputs">
-				<div class="ui-grid-col-4"></div>
-				<div class="ui-grid-col-6" style="padding-right: 20px;">
-					<p:inputTextarea style="width:100%;" id="inputComment" rows="10" cols="50"
-									 queryDelay="750"
-									 minQueryLength="4" />
-					<p:watermark for="inputComment" value="Write your comment here..." />
-
-
-
-					<p:commandButton style="float:right;" value="Post your comment"/>
-									<!-- actionListener=""
-									 update="" /> -->
-				</div>
-				<div class="ui-grid-col-2 text-center">
-					<span><p:rating class="ui-grid-col-9" value="2" /></span>
-
+				<div class="ui-grid-row recipe-detail-comment">
+					<div class="ui-grid-col-2 text-center">
+						<i class="fa fa-user fa-3x"></i><br/>
+						bigMumy
+					</div>
+					<div class="ui-grid-col-2 text-center">04/03/2013</div>
+					<div class="ui-grid-col-6">
+						Lorem Ipsum est un générateur de faux textes aléatoires. Vous choisissez le nombre de paragraphes, de mots ou de listes. Vous obtenez alors un texte aléatoire que vous pourrez ensuite utiliser librement dans vos maquettes.
+					</div>
+					<div class="ui-grid-col-2 text-center">
+						<p:rating class="ui-grid-col-9" value="2" readonly="true" />
+					</div>
 				</div>
 
-			</h:form>
-		</div>
+
+
+				<!-- INPUT -->
+
+				<h:form class="ui-grid-row recipe-detail-inputs">
+					<div class="ui-grid-col-4"></div>
+					<div class="ui-grid-col-6" style="padding-right: 20px;">
+						<p:inputTextarea style="width:100%;" id="inputComment" rows="10" cols="50"
+										 queryDelay="750"
+										 minQueryLength="4" />
+						<p:watermark for="inputComment" value="Write your comment here..." />
+
+
+						<p:commandButton style="float:right;" value="Post your comment"/>
+						<!-- actionListener=""
+                         update="" /> -->
+					</div>
+					<div class="ui-grid-col-2 text-center">
+						<span><p:rating class="ui-grid-col-9" value="2" /></span>
+
+					</div>
+
+				</h:form>
+			</p:outputPanel>
+		</p:outputPanel>
 
 		<!-- TEST -->
 	<h:form>
 		TEST
+		#{recipeControlerBean.test()}
 		<p:inputText value="#{recipeSubmissionModelBean.title}" />
-		<p:button icon="fa fa-sign-out"
-						 action="#{recipeControlerBean.displayRecipeDetail(recipeSubmissionModelBean)}"/>
+		<p:commandButton icon="fa fa-sign-out"
+						 action="#{recipeControlerBean.displayRecipeDetail(recipeSubmissionModelBean)}"
+						update="recipe-detail-content"/>
 	</h:form>
 
 

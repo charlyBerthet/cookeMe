@@ -103,7 +103,7 @@ public class RecipesDao {
 
 		String sql = 	"select title, description, duration, expertise, nbPeople, type " +
 						"from recipe " +
-						"where duration >= ? and expertise <= ? and nbpeople >= ? and type = ?";
+						"where duration <= ? and expertise <= ? and nbpeople >= ? and type = ?";
 
 		try {
 				preparedStatement = connect().prepareStatement(sql);
@@ -145,7 +145,7 @@ public class RecipesDao {
 		}
 
 		System.out.println("--------Affichage recherche--------");
-		for(RecipeModel recipeModel : recipesDao.searchRecipes(1,200,1,"salad")){
+		for(RecipeModel recipeModel : recipesDao.searchRecipes(500,5,1,"salad")){
 			System.out.println(recipeModel.toString());
 		}
 

@@ -55,7 +55,7 @@ public class RecipeControlerBean implements Serializable{
 		//recipeResultList.xhtml d’afficher les recettes trouvées
 
 		// Get recipe list
-		List<RecipeModel> recipes = this.recipeDao.getAllRecipes();//searchRecipes(recipe.getDuration(),recipe.getExpertise(),recipe.getNbpeople(),recipe.getType());
+		List<RecipeModel> recipes = this.recipeDao.searchRecipes(recipe.getDuration(),recipe.getExpertise(),recipe.getNbpeople(),recipe.getType());
 
 		RecipeListModelBean recipeListModelBean = new RecipeListModelBean();
 

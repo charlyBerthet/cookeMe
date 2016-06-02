@@ -19,12 +19,12 @@
 						<h3>For how many people : <h:outputText id="outputNbPeople" value="#{searchRecipeBean.nbpeople}"/></h3>
 						<h:panelGrid columns="1" style="margin-bottom: 10px">
 							<h:inputHidden id="nbPeople" value="#{searchRecipeBean.nbpeople}" />
-							<p:slider for="nbPeople" display="outputNbPeople" style="width: 200px" displayTemplate="{value}" maxValue="20"/>
+							<p:slider for="nbPeople" display="outputNbPeople" style="width: 200px" displayTemplate="{value}" minValue="1" maxValue="20"/>
 						</h:panelGrid>
 					</div>
 					<div class="ui-grid-col-12">
 						<h3>Preparation duration (min):</h3>
-						<p:spinner id="stepDuration" value="#{searchRecipeBean.duration}" stepFactor="30" min="0"/>
+						<p:spinner id="stepDuration" value="#{searchRecipeBean.duration}" stepFactor="15" min="0"/>
 					</div>
 				</div>
 				<div class="ui-grid-row">

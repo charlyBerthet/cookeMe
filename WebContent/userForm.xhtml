@@ -13,21 +13,14 @@
     		<p:panel header="Validate">
        		<p:messages autoUpdate="true"/>
  
-<<<<<<< HEAD
-        	<h:panelGrid id="grid" columns="3" cellpadding="5">
-            	<h:outputLabel for="surname" value="Surname:" style="font-weight:bold"/>                    
-            	<p:inputText id="surname" value="#{userSubmissionModelBean.surname}" required="true" validatorMessage="Caractere autorisé :[a-z A-Z]">
-            		<f:validateRegex pattern="[a-zA-Z]+"></f:validateRegex>
-            	</p:inputText>
-            	<p:message for="surname" />
-=======
+
         <h:panelGrid id="grid" columns="3" cellpadding="5">
             <h:outputLabel for="surname" value="Surname:" style="font-weight:bold"/>                    
             <p:inputText id="surname" value="#{userSubmissionModelBean.surname}" required="true" validatorMessage="Entrez que des lettres">
             <f:validateRegex pattern="[a-zA-Z]+"></f:validateRegex>
             </p:inputText>
             <p:message for="surname" />
->>>>>>> branch 'master' of https://github.com/charlyBerthet/cookeMe
+
             
  
             	<h:outputLabel for="lastname" value="Lastname:" style="font-weight:bold"/>                    

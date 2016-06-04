@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.io.StringReader;
 
 public class RecipeModel implements Serializable{
 	private String title;
@@ -35,11 +36,15 @@ public class RecipeModel implements Serializable{
 	public void setNbpeople(int nbpeople) {
 		this.nbpeople = nbpeople;
 	}
-	public int getDuration() {
+	public String getDuration() {
+		return String.format("%02d",duration/60) + ":" + String.format("%02d",duration%60);
+	}
+	public int getDurationInt() {
 		return duration;
 	}
-	public void setDuration(int duration) {
-		this.duration = duration;
+	public void setDuration(String duration) {
+		String[] durations = duration.split(":");
+		this.duration = Integer.valueOf(durations[0])*60+ Integer.valueOf(durations[1]);
 	}
 	public String getType() {
 		return type;

@@ -39,7 +39,7 @@ public class RecipesDao {
 			query.setString(2, recipe.getTitle());
 			query.setInt(3, recipe.getExpertise());
 			query.setInt(4, recipe.getNbpeople());
-			query.setInt(5, recipe.getDuration());
+			query.setInt(5, recipe.getDurationInt());
 			query.setString(6, recipe.getType());
 
 			query.executeUpdate();
@@ -103,7 +103,8 @@ public class RecipesDao {
 
 		String sql = 	"select title, description, duration, expertise, nbPeople, type " +
 						"from recipe " +
-						"where duration <= ? and expertise <= ? and nbpeople >= ? and type = ?";
+						"where duration <= ? and expertise <= ? and nbpeople >= ?";
+		if(type.compareTo("[ALL]") != 0) sql += " and type = ? ";
 
 		try {
 				preparedStatement = connect().prepareStatement(sql);
@@ -111,7 +112,8 @@ public class RecipesDao {
 				preparedStatement.setInt(1,duration);
 				preparedStatement.setInt(2,expertise);
 				preparedStatement.setInt(3,nbPeople);
-				preparedStatement.setString(4,type);
+				if(type.compareTo("[ALL]") != 0)
+					preparedStatement.setString(4,type);
 
 				ResultSet resultSet  = preparedStatement.executeQuery();
 
@@ -145,7 +147,7 @@ public class RecipesDao {
 		}
 
 		System.out.println("--------Affichage recherche--------");
-		for(RecipeModel recipeModel : recipesDao.searchRecipes(500,5,1,"salad")){
+		for(RecipeModel recipeModel : recipesDao.searchRecipes(600,5,1,"salad")){
 			System.out.println(recipeModel.toString());
 		}
 

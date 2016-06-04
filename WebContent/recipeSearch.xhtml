@@ -24,7 +24,8 @@
 					</div>
 					<div class="ui-grid-col-12">
 						<h3>Preparation duration (min):</h3>
-						<p:spinner id="stepDuration" value="#{searchRecipeBean.duration}" stepFactor="15" min="0"/>
+						<!--<p:spinner id="stepDuration" value="#{searchRecipeBean.duration}" mask="00:00" stepFactor="15" min="0"/>-->
+						<p:inputMask id="duration" value="#{searchRecipeBean.duration}" mask="99:99"/>
 					</div>
 				</div>
 				<div class="ui-grid-row">
@@ -35,7 +36,7 @@
 					<div class="ui-grid-col-12">
 						<h3>Cook type :</h3>
 						<p:selectOneMenu id="recipeType" value="#{searchRecipeBean.type}" style="width:125px">
-							<f:selectItem itemLabel="Select One" itemValue="" />
+							<f:selectItem itemLabel="All" itemValue="[ALL]" />
 							<f:selectItem itemLabel="Salad" itemValue="salad" />
 							<f:selectItem itemLabel="Meal" itemValue="meal" />
 							<f:selectItem itemLabel="Fish" itemValue="fish" />

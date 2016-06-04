@@ -63,7 +63,7 @@
 								<div class="ui-grid-col-12">
 									<p:commandButton id="butLogin" icon="fa fa-sign-in"
 										actionListener="#{userControlerBean.checkUser(loginBean)}"
-										update="loginLogoutBlock registerBlock" />
+										update="loginLogoutBlock registerBlock allContent" />
 								</div>
 							</div>
 						</div>
@@ -77,16 +77,16 @@
 						<p>52 users already connected</p>
 						<p:commandButton id="butLogout" icon="fa fa-sign-out" 
 										actionListener="#{userControlerBean.logout()}"
-										update="loginLogoutBlock registerBlock"/>
+										update="loginLogoutBlock registerBlock allContent"/>
 					</h:form >
 
 				</p:outputPanel>
 			</div>
 
 			<div class="ui-grid-row">
-				<div class="ui-grid-col-12">
-					<ui:insert name="activityContent">Contenu de l'activité</ui:insert>
-				</div>
+				<p:outputPanel id="allContent" class="ui-grid-col-12">
+					<ui:insert name="activityContent" >Contenu de l'activité</ui:insert>
+				</p:outputPanel>
 			</div>
 
 

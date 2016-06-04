@@ -18,7 +18,8 @@
             	Result List
         	</f:facet>
 
-			<p:panel header="#{recipe.title}" style="text-align:center">
+
+			<p:panel header="#{recipe.title}" style="text-align:center" >
 				<div>
 						<p:panelGrid columns="2" style="width:50%;">
 							<i class="fa fa-cutlery fa-lg" style="text-align: right;"></i>
@@ -37,6 +38,8 @@
 						</p:panelGrid>
 
 						<p:outputPanel style="text-align: right">#{recipe.description}</p:outputPanel>
+
+					<p:commandButton action="#{recipeControlerBean.displayRecipeDetail(recipe)}" value="Voir en détail" />
 				</div>
 
 			</p:panel>

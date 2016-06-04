@@ -68,14 +68,18 @@ public class RecipeControlerBean implements Serializable{
 	}
 	
 	
-	public String displayRecipeDetail(RecipeModel recipe){
+	public void displayRecipeDetail(RecipeModel recipe){
 		recipe = this.recipeDao.getRecipeByTitle(recipe.getTitle());
 
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		Map<String, Object> sessionMap = externalContext.getSessionMap();
 		sessionMap.put("recipeDetail", recipe);
-		System.out.println(recipe);
-		return "recipeDetail.xhtml";
+		try{
+			FacesContext.getCurrentInstance().getExternalContext().redirect("recipeDetail.xhtml");
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
 	}
 
 }

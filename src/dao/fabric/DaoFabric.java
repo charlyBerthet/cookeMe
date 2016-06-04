@@ -1,5 +1,6 @@
 package dao.fabric;
 
+import dao.instance.CommentDao;
 import dao.instance.RecipesDao;
 import dao.instance.UserDao;
 
@@ -52,10 +53,15 @@ public final class DaoFabric {
 		return userDao;
 		
 	}
-	
+
 	public RecipesDao createRecipesDao(){
 		RecipesDao receipesDao =new RecipesDao(this.DB_HOST,this.DB_PORT,this.DB_NAME,this.DB_USER,this.DB_PWD);
 		return receipesDao;
+	}
+
+	public CommentDao createCommentDao(){
+		CommentDao dao =new CommentDao(this.DB_HOST,this.DB_PORT,this.DB_NAME,this.DB_USER,this.DB_PWD);
+		return dao;
 	}
 }
 

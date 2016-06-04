@@ -12,18 +12,18 @@ public class CommentModelBean implements Serializable {
 
 	private String content;
 	private int id;
-	private int user_id;
-	private int recipe_id;
+	private String user_login;
+	private String recipe_title;
 	private Date date;
 	private int rate;
 
 	public CommentModelBean(){}
 
-	public CommentModelBean(String content, int id, int user_id, int recipe_id, Date date, int rate) {
+	public CommentModelBean(String content, int id, String user_login, String recipe_title, Date date, int rate) {
 		this.content = content;
 		this.id = id;
-		this.user_id = user_id;
-		this.recipe_id = recipe_id;
+		this.user_login = user_login;
+		this.recipe_title = recipe_title;
 		this.date = date;
 		this.rate = rate;
 	}
@@ -44,20 +44,20 @@ public class CommentModelBean implements Serializable {
 		this.id = id;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public String getUser_login() {
+		return user_login;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUser_login(String user_login) {
+		this.user_login = user_login;
 	}
 
-	public int getRecipe_id() {
-		return recipe_id;
+	public String getRecipe_title() {
+		return recipe_title;
 	}
 
-	public void setRecipe_id(int recipe_id) {
-		this.recipe_id = recipe_id;
+	public void setRecipe_title(String recipe_title) {
+		this.recipe_title = recipe_title;
 	}
 
 	public Date getDate() {

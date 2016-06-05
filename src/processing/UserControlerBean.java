@@ -23,7 +23,6 @@ public class UserControlerBean implements Serializable{
 	
 	public UserControlerBean() {
 		this.userDao=DaoFabric.getInstance().createUserDao();
-		new SessionListen();
 	}
 	
 	public boolean checkUser(LoginBean loginBean){

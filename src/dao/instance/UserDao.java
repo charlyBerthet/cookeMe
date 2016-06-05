@@ -58,10 +58,12 @@ public class UserDao {
 			// create connection
 			connection= connect();
 			query =  connection.createStatement();
-			String sql="SELECT surname, lastname, login, email, pwd, age FROM user";
+			String sql="SELECT surname, lastname, login, email, pwd, age, isAdmin FROM user";
 			ResultSet result = query.executeQuery(sql);
 			while(result.next()){
-				userList.add(new UserModelBean(result.getString("surname"), result.getString("lastname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age")));
+				UserModelBean user = new UserModelBean(result.getString("surname"), result.getString("lastname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age"));
+				user.setIsAdmin(result.getBoolean("isAdmin"));
+				userList.add(user);
 			}
 			query.close();
 			connection.close();
@@ -109,8 +111,16 @@ public class UserDao {
 			ResultSet result = preparedStatement.executeQuery();
 
 			if(result.next()){
-				userCheck = new UserModelBean(result.getString("lastname"), result.getString("surname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age"), result.getDate("lastConnection"));
+				userCheck = new UserModelBean(result.getString("lastname"), result.getString("surname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age"), new java.util.Date(result.getTimestamp("lastConnection").getTime()));
 			}
+			preparedStatement.close();
+
+			// MAJ user date connection
+			sql="UPDATE user SET lastConnection = ? where login = ?";
+			preparedStatement =  connection.prepareStatement(sql);
+			preparedStatement.setTimestamp(1, new Timestamp(new java.util.Date().getTime()));
+			preparedStatement.setString(2, login);
+			preparedStatement.executeUpdate();
 			preparedStatement.close();
 			connection.close();
 		}catch(SQLException e) {

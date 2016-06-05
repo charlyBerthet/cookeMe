@@ -17,6 +17,7 @@ public class UserModelBean implements Serializable {
 	private Date lastConnection;
 	private int age;
 	private int nbSession;
+	private boolean isAdmin;
 
 	public UserModelBean(){}
 
@@ -103,6 +104,14 @@ public class UserModelBean implements Serializable {
 
 	public void setNbSession(int nbSession) {
 		this.nbSession = nbSession;
+	}
+
+	public boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(boolean admin) {
+		isAdmin = admin;
 	}
 
 	@Override

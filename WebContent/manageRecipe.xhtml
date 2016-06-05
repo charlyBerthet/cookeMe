@@ -1,0 +1,88 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<f:view beforePhase="#{recipeControlerBean.loadAllRecipe()}" />
+
+
+<ui:composition template="templates/mainTemplate.xhtml">
+	<ui:define name="cssBlock">
+		<h:outputStylesheet library="style" name="manageRecipeStyle.css" />
+	</ui:define>
+
+
+	<ui:define name="activityTitle">Administration</ui:define>
+	<ui:define name="registerBlock"></ui:define>
+	<ui:define name="loginBlock"></ui:define>
+
+	<ui:define name="activityContent">
+		<h:panelGrid columns="2" cellpadding="5" id="panel">
+			<p:outputPanel>
+				<p:dataTable var="recipe" value="#{recipeList}">
+
+					<p:column headerText="Title">
+						<h:outputText value="#{recipe.title}" />
+					</p:column>
+
+					<p:column>
+						<!-- <i class="fa fa-trash fa-lg"></i> -->
+						<p:commandButton action="#{recipeControlerBean.getRecipeDetail(recipe)}" update="detail" validateClient="true" value="edit" />
+					</p:column>
+
+				</p:dataTable>
+				<p:commandButton class="button" value="ADD" />
+			</p:outputPanel>
+
+			<p:outputPanel>
+				<p:panel>
+				<p:panelGrid columns="2" cellpadding="5" id="detail" layout="grid">
+					<p:outputPanel>Title :<p:inputText value="#{recipeEdit.title}"></p:inputText></p:outputPanel>
+					<p:outputPanel></p:outputPanel>
+					<p:outputPanel>
+						<h3>For how many people : <h:outputText id="outputNbPeople" value="#{searchRecipeBean.nbpeople}"/></h3>
+						<h:panelGrid columns="1" style="margin-bottom: 10px">
+							<h:inputHidden id="nbPeople" value="#{recipeEdit.nbpeople}" />
+							<p:slider for="nbPeople" display="outputNbPeople" style="width: 200px" displayTemplate="{value}" minValue="1" maxValue="20"/>
+						</h:panelGrid>
+					</p:outputPanel>
+					
+					<p:outputPanel>
+					<h3>Preparation duration (min):</h3>
+						<!--<p:spinner id="stepDuration" value="#{searchRecipeBean.duration}" mask="00:00" stepFactor="15" min="0"/>-->
+						<p:inputMask id="duration" value="#{recipeEdit.duration}" mask="99:99"/>
+					</p:outputPanel>
+					
+					<p:outputPanel>
+						<h3>Cook expertise:</h3>
+						<p:rating value="#{recipeEdit.expertise}" />
+					</p:outputPanel>
+					
+					<p:outputPanel>
+						<h3>Cook type :</h3>
+						<p:selectOneMenu id="recipeType" value="#{recipeEdit.type}" style="width:125px">
+							<f:selectItem itemLabel="All" itemValue="[ALL]" />
+							<f:selectItem itemLabel="Salad" itemValue="salad" />
+							<f:selectItem itemLabel="Meal" itemValue="meal" />
+							<f:selectItem itemLabel="Fish" itemValue="fish" />
+							<f:selectItem itemLabel="Dessert" itemValue="dessert" />
+						</p:selectOneMenu>
+					</p:outputPanel>
+					
+					<p:outputPanel>
+   						 <p:inputTextarea value="#{recipeEdit.description}" rows="6" cols="33" />
+					</p:outputPanel>
+					
+					<p:outputPanel></p:outputPanel>	
+					<p:commandButton  value="Save" />
+					<p:commandButton  value="Cancel" />
+				</p:panelGrid>
+				</p:panel>
+			</p:outputPanel>
+		</h:panelGrid>
+	</ui:define>
+
+</ui:composition>
+</html>

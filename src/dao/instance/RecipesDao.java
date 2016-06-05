@@ -104,7 +104,7 @@ public class RecipesDao {
 		PreparedStatement preparedStatement;
 
 		try {
-			preparedStatement = connect().prepareStatement("UPDATE cookbcf.recipe SET descrition=?, title=?, expertise=?, nbpeople=?, duration=?, `type`=? WHERE title=?;");
+			preparedStatement = connect().prepareStatement("UPDATE recipe SET descrition = ?, title = ?, expertise = ?, nbpeople = ?, duration = ?, type = ? WHERE title=?;");
 			
 			preparedStatement.setString(1,recipe.getDescription());
 			preparedStatement.setString(2,recipe.getTitle());
@@ -113,7 +113,9 @@ public class RecipesDao {
 			preparedStatement.setInt(5,recipe.getDurationInt());
 			preparedStatement.setString(6,recipe.getType());
 			preparedStatement.setString(7,recipe.getTitle());
-			ResultSet resultSet = preparedStatement.executeQuery();
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+			connection.close();
 		
 		} catch (SQLException e) {
 			e.printStackTrace();

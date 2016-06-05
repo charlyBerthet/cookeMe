@@ -100,7 +100,7 @@ public class RecipesDao {
 	
 	public void updateRecipe(RecipeModel recipe){
 
-		RecipeModel recipeModel = null;
+
 		PreparedStatement preparedStatement;
 
 		try {
@@ -120,6 +120,34 @@ public class RecipesDao {
 		}
 
 
+	}
+	
+	public void deleteRecipe(RecipeModel recipe) {
+		PreparedStatement query;
+		try{
+			connection = connect();
+
+			String sql 	= 	"INSERT INTO cookbcf.recipe"
+							+"(description, title, expertise, nbpeople, duration, type)"
+							+"VALUES(?, ?, ?, ?, ?, ?)";
+
+			query 		= connection.prepareStatement(sql);
+
+			query.setString(1, recipe.getDescription());
+			query.setString(2, recipe.getTitle());
+			query.setInt(3, recipe.getExpertise());
+			query.setInt(4, recipe.getNbpeople());
+			query.setInt(5, recipe.getDurationInt());
+			query.setString(6, recipe.getType());
+
+			query.executeUpdate();
+
+			query.close();
+			connection.close();
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public List<RecipeModel> searchRecipes(int duration,int expertise,int nbPeople,String type){

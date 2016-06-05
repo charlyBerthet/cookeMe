@@ -21,19 +21,22 @@
 	<ui:define name="activityContent">
 		<h:panelGrid columns="2" cellpadding="5" id="panel">
 			<p:outputPanel>
-				<p:dataTable var="recipe" value="#{recipeList}">
+				<h:dataTable var="recipe" value="#{recipeList}">
 
-					<p:column headerText="Title">
-						<h:outputText value="#{recipe.title}" />
-					</p:column>
+					<h:column headerText="Title">
+						<h:outputText value="#{recipe.title}"/>
+						<h:commandButton value="edit" action="#{recipeControlerBean.getRecipeDetail()}">    
+      						<f:setPropertyActionListener value="#{recipe.title}" target="#{recipeControlerBean.selectedRecipe}" /> 
+    					</h:commandButton>
+					</h:column>
 
-					<p:column>
+				 <h:column>
 						<!-- <i class="fa fa-trash fa-lg"></i> -->
 						<p:commandButton action="#{recipeControlerBean.getRecipeDetail(recipe)}" update="test" value="edit" />
 						<h:outputText id="test" value="#{recipeEdit.title}"></h:outputText>
-					</p:column>
+					</h:column>
 
-				</p:dataTable>
+				</h:dataTable>
 				<p:commandButton class="button" value="ADD" />
 			</p:outputPanel>
 

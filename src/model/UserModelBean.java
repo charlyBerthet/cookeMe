@@ -16,6 +16,7 @@ public class UserModelBean implements Serializable {
 	private String pwd;
 	private Date lastConnection;
 	private int age;
+	private int nbSession;
 
 	public UserModelBean(){}
 
@@ -26,6 +27,7 @@ public class UserModelBean implements Serializable {
 		this.login = login;
 		this.pwd = pwd;
 		this.age = age;
+		this.nbSession = SessionListen.getTotalActiveSession();
 	}
 
 	public UserModelBean(String surname, String lastname, String email, String login, String pwd, int age, Date lastConnection) {
@@ -36,6 +38,7 @@ public class UserModelBean implements Serializable {
 		this.pwd = pwd;
 		this.age = age;
 		this.lastConnection = lastConnection;
+		this.nbSession = SessionListen.getTotalActiveSession();
 	}
 
 	public String getLastname() {
@@ -92,6 +95,14 @@ public class UserModelBean implements Serializable {
 
 	public void setLastConnection(Date lastConnection) {
 		this.lastConnection = lastConnection;
+	}
+
+	public int getNbSession() {
+		return SessionListen.getTotalActiveSession();
+		}
+
+	public void setNbSession(int nbSession) {
+		this.nbSession = nbSession;
 	}
 
 	@Override

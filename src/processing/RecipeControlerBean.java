@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import model.CommentModelBean;
 import model.RecipeListModelBean;
 import model.RecipeModel;
 import dao.fabric.DaoFabric;
@@ -76,6 +77,17 @@ public class RecipeControlerBean implements Serializable{
 		sessionMap.put("recipeDetail", recipe);
 		try{
 			FacesContext.getCurrentInstance().getExternalContext().redirect("recipeDetail.xhtml");
+
+			// get comments controler
+			CommentControlerBean commentControler = (CommentControlerBean)externalContext.getApplicationMap().get("commentControlerBean");
+			if(commentControler == null){
+				commentControler = new CommentControlerBean();
+				externalContext.getApplicationMap().put("commentControlerBean",commentControler);
+			}
+
+			// Get comment link with this recipe
+			List<CommentModelBean>  listComment = commentControler.getAllCommentsFromRecipeTitle(recipe.getTitle());
+			sessionMap.put("listComment", listComment);
 		}catch (Exception e){
 			e.printStackTrace();
 		}

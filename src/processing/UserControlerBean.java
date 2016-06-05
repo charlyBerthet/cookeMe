@@ -84,4 +84,19 @@ public class UserControlerBean implements Serializable{
 		UserModelBean user = (UserModelBean)sessionMap.get("loggedUser");
 		return user;
 	}
+
+
+	public void logAdminUser(LoginBean loginBean){
+		UserModelBean userFound = userDao.checkAdminUser(loginBean.getLogin(), loginBean.getPwd());
+		FacesContext context	=	FacesContext.getCurrentInstance();
+
+		ExternalContext externalContext =	context.getExternalContext();
+		Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
+
+		sessionMap.put("loggedAdminUser", userFound);
+		if( userFound != null)
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful",  "Connection success") );
+		else
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hmmm....",  "Connection fail") );
+	}
 }

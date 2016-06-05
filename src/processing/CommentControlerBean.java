@@ -6,8 +6,11 @@ import model.CommentModelBean;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 @ManagedBean
 @ApplicationScoped
@@ -24,6 +27,12 @@ public class CommentControlerBean implements Serializable{
 		comment.setUser_login(user_login);
 		comment.setRecipe_title(recipe_title);
 		this.commentDao.addComment(comment);
+
+		// refresh comments
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		List<CommentModelBean>  listComment = this.getAllCommentsFromRecipeTitle(recipe_title);
+		sessionMap.put("listComment", listComment);
 	}
 
 	public List<CommentModelBean> getAllCommentsFromRecipeTitle(String recipeTitle){

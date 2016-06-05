@@ -81,11 +81,35 @@ public class UserDao {
 			preparedStatement =  connection.prepareStatement(sql);
 			preparedStatement.setString(1, login);
 			preparedStatement.setString(2, pwd);
-			
+
 			ResultSet result = preparedStatement.executeQuery();
 
 			if(result.next()){
 				userCheck = new UserModelBean(result.getString("lastname"), result.getString("surname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age"));
+			}
+			preparedStatement.close();
+			connection.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return userCheck;
+	}
+
+	public UserModelBean checkAdminUser(String login, String pwd) {
+		PreparedStatement preparedStatement;
+		UserModelBean userCheck =null;
+		try{
+			// create connection
+			connection= connect();
+			String sql="SELECT * FROM user where login = ? and pwd = ? and isAdmin = 1";
+			preparedStatement =  connection.prepareStatement(sql);
+			preparedStatement.setString(1, login);
+			preparedStatement.setString(2, pwd);
+
+			ResultSet result = preparedStatement.executeQuery();
+
+			if(result.next()){
+				userCheck = new UserModelBean(result.getString("lastname"), result.getString("surname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age"), result.getDate("lastConnection"));
 			}
 			preparedStatement.close();
 			connection.close();

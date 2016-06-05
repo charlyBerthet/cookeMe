@@ -3,6 +3,7 @@ package model;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
+import java.util.Date;
 
 @ManagedBean
 @SessionScoped
@@ -13,6 +14,7 @@ public class UserModelBean implements Serializable {
 	private String email;
 	private String login;
 	private String pwd;
+	private Date lastConnection;
 	private int age;
 
 	public UserModelBean(){}
@@ -24,6 +26,16 @@ public class UserModelBean implements Serializable {
 		this.login = login;
 		this.pwd = pwd;
 		this.age = age;
+	}
+
+	public UserModelBean(String surname, String lastname, String email, String login, String pwd, int age, Date lastConnection) {
+		this.lastname = lastname;
+		this.surname = surname;
+		this.email = email;
+		this.login = login;
+		this.pwd = pwd;
+		this.age = age;
+		this.lastConnection = lastConnection;
 	}
 
 	public String getLastname() {
@@ -72,6 +84,14 @@ public class UserModelBean implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Date getLastConnection() {
+		return lastConnection;
+	}
+
+	public void setLastConnection(Date lastConnection) {
+		this.lastConnection = lastConnection;
 	}
 
 	@Override

@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+
+<ui:composition template="templates/mainTemplate.xhtml">
+	<ui:define name="cssBlock">
+		<h:outputStylesheet library="style" name="adminLogin.css"  />
+	</ui:define>
+
+
+	<ui:define name="activityTitle">Administration</ui:define>
+	<ui:define name="registerBlock"></ui:define>
+	<ui:define name="loginBlock"></ui:define>
+
+	<ui:define name="activityContent">
+		<p:outputPanel>
+			<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+			<h:panelGrid columns="2" cellpadding="5" id="panelLogin">
+				<h:form>
+					<p:outputPanel>
+						<p:inputText id="login" value="#{loginBean.login}" required="true" label="login" />
+						<p:watermark for="login" value="Login" />
+					</p:outputPanel>
+
+
+					<p:outputPanel>
+						<p:password id="password" value="#{loginBean.pwd}" required="true" label="password" />
+						<p:watermark for="password" value="Password" />
+					</p:outputPanel>
+
+					<p:commandButton value="Go" update="growl" actionListener="#{userControlerBean.logAdminUser(loginBean)}"/>
+				</h:form>
+			</h:panelGrid>
+		</p:outputPanel>
+	</ui:define>
+
+</ui:composition>
+</html>

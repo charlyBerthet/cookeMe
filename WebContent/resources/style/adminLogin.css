@@ -1,0 +1,13 @@
+#panelLogin{
+	margin: auto;
+	border:1px solid #BBB;
+	padding-right: 50px;
+	padding-left: 50px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#panelLogin input, #panelLogin button{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}

@@ -109,22 +109,25 @@
 				</div>
 
 				<!-- COMMENT -->
-                <c:forEach var="comment" items="#{commentControlerBean.getAllCommentsFromRecipeTitle(recipeDetail.title)}">
+                <p:outputPanel id="recipe-detail-comments">
+                    <c:forEach var="comment" items="#{listComment}" >
 
-                    <div class="ui-grid-row recipe-detail-comment">
-                        <div class="ui-grid-col-2 text-center">
-                            <i class="fa fa-user fa-3x"></i><br/>
-                            #{comment.user_login}
+                        <div class="ui-grid-row recipe-detail-comment">
+                            <div class="ui-grid-col-2 text-center">
+                                <i class="fa fa-user fa-3x"></i><br/>
+                                #{comment.user_login}
+                            </div>
+                            <div class="ui-grid-col-2 text-center">#{comment.date}</div>
+                            <div class="ui-grid-col-6">
+                                #{comment.content}
+                            </div>
+                            <div class="ui-grid-col-2 text-center">
+                                <p:rating class="ui-grid-col-9" value="#{comment.rate}" readonly="true" />
+                            </div>
                         </div>
-                        <div class="ui-grid-col-2 text-center">#{comment.date}</div>
-                        <div class="ui-grid-col-6">
-                            #{comment.content}
-                        </div>
-                        <div class="ui-grid-col-2 text-center">
-                            <p:rating class="ui-grid-col-9" value="#{comment.rate}" readonly="true" />
-                        </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
+                </p:outputPanel>
+
 
 
 
@@ -138,16 +141,13 @@
 										 value="#{commentModelBean.content}"/>
 						<p:watermark for="inputComment" value="Write your comment here..." />
 
-						<!-- appliquer la recipe actuel et le user connecté -->
 
 						<p:commandButton style="float:right;" value="Post your comment"
 										 actionListener="#{commentControlerBean.addComment(commentModelBean,
 										 userControlerBean.getLoggedUser().login,
 										 recipeDetail.title)}"
-										 update="recipe-detail-content">
+										 update="recipe-detail-comments">
                         </p:commandButton>
-						<!-- actionListener=""
-                         update="" /> -->
 					</div>
 					<div class="ui-grid-col-2 text-center">
 						<span><p:rating class="ui-grid-col-9" id="inputRate" value="#{commentModelBean.rate}" /></span>

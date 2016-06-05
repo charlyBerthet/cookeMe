@@ -5,7 +5,7 @@
 	  xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="templates/mainTemplate.xhtml">
-<ui:define name="activityTitle">Search recipe</ui:define>
+<ui:define name="activityTitle">Recipes</ui:define>
 <ui:define name="cssBlock">
 	<h:outputStylesheet library="style" name="searchStyle.css" />
 </ui:define>
@@ -46,7 +46,7 @@
 
 			</div>
 
-			<p:commandButton  action="#{recipeControlerBean.searchRecipe(searchRecipeBean)}" value="Search" icon="ui-icon-check"/>
+			<p:commandButton  action="#{recipeControlerBean.searchRecipe(searchRecipeBean)}" value="Teach Me !" icon="ui-icon-check"/>
 
 		</p:panel>
 	</h:form>

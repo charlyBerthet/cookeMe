@@ -7,26 +7,13 @@
 
 
 
-<ui:composition template="templates/mainTemplate.xhtml">
+<ui:composition template="templates/manageTemplate.xhtml">
 	<ui:define name="cssBlock">
 		<h:outputStylesheet library="style" name="adminLogin.css"  />
 	</ui:define>
 
 
-	<ui:define name="activityTitle">Administration</ui:define>
-	<ui:define name="registerBlock">
-		<p:outputPanel style="text-align: left;" class="ui-grid-col-3 nav-header-button">
-			last connection
-			<h:outputText value="#{loggedAdminUser.lastConnection}" >
-				<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="CET"/>
-			</h:outputText>
-		</p:outputPanel>
-	</ui:define>
-	<ui:define name="loginBlock">
-		<p:outputPanel style="text-align: right; padding-right: 10px;" class="ui-grid-col-2 nav-header-button">
-			Welcome <a href="" style="margin-left: 5px;">#{loggedAdminUser.login}</a>
-		</p:outputPanel>
-	</ui:define>
+
 
 	<ui:define name="activityContent">
 		<p:outputPanel class="ui-grid ui-grid-responsive">

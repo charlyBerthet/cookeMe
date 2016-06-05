@@ -114,6 +114,10 @@ public class UserControlerBean implements Serializable{
 
 	public void deleteUser(UserModelBean user){
 		this.userDao.deleteUser(user);
+		FacesContext context	=	FacesContext.getCurrentInstance();
+		ExternalContext externalContext =	context.getExternalContext();
+		Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
+		sessionMap.put("userEditing", null);
 		this.loadAllUser();
 	}
 

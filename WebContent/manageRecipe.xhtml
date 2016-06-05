@@ -8,15 +8,13 @@
 <f:view beforePhase="#{recipeControlerBean.loadAllRecipe()}" />
 
 
-<ui:composition template="templates/mainTemplate.xhtml">
+<ui:composition template="templates/manageTemplate.xhtml">
 	<ui:define name="cssBlock">
 		<h:outputStylesheet library="style" name="manageRecipeStyle.css" />
 	</ui:define>
 
 
-	<ui:define name="activityTitle">Administration</ui:define>
-	<ui:define name="registerBlock"></ui:define>
-	<ui:define name="loginBlock"></ui:define>
+
 
 	<ui:define name="activityContent">
 		<h:panelGrid columns="2" cellpadding="5" id="panel">

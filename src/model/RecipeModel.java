@@ -10,6 +10,7 @@ public class RecipeModel implements Serializable{
 	private int nbpeople;
 	private int duration;
 	private String type;
+	private int id;
 	
 	
 	public String getTitle() {
@@ -62,8 +63,15 @@ public class RecipeModel implements Serializable{
 		this.duration = duration;
 		this.type = type;
 	}
-	
-	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String toString(){
 		return"[TITLE]:"+this.getTitle()+",[DESCRIPTION]:"+this.getDescription()
 				+",[EXPERTISE]:"+this.getExpertise()+",[NBPEOPLE]:"+this.getNbpeople()

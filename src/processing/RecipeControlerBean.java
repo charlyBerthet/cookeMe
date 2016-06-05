@@ -95,9 +95,8 @@ public class RecipeControlerBean implements Serializable{
 		}
 
 	}
-	public void updateRecipe(RecipeModel recipe){
-		this.recipeDao.updateRecipe(recipe);
-	}
+
+
 	public void getRecipeDetail(RecipeModel recipe){
 		FacesContext context	=	FacesContext.getCurrentInstance();
 		ExternalContext externalContext =	context.getExternalContext();
@@ -105,11 +104,40 @@ public class RecipeControlerBean implements Serializable{
 		sessionMap.put("recipeEdit", recipe);
 		System.out.println(recipe.getTitle());
 	}
-	public void deleteRecipe(RecipeModel recipe){
-		
-	}
-	public void setSelectedRecipe(String selectedRecipe) {
-		this.selectedRecipe = selectedRecipe;
-	}
 
+
+
+	public void deleteRecipe(RecipeModel recipe){
+		this.recipeDao.deleteRecipe(recipe);
+		FacesContext context	=	FacesContext.getCurrentInstance();
+		ExternalContext externalContext =	context.getExternalContext();
+		Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
+		sessionMap.put("recipeEdit", null);
+		this.loadAllRecipe();
+	}
+	public void editRecipe(RecipeModel recipe){
+		FacesContext context	=	FacesContext.getCurrentInstance();
+		ExternalContext externalContext =	context.getExternalContext();
+		Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
+		sessionMap.put("recipeEdit", recipe);
+	}
+	public void updateRecipe(RecipeModel recipe){
+		if ( this.recipeDao.getRecipeById(recipe.getId()) != null)
+			this.recipeDao.updateRecipe(recipe);
+		else
+			this.recipeDao.addRecipe(recipe);
+		this.loadAllRecipe();
+	}
+	public void cancelEditRecipe(){
+		FacesContext context	=	FacesContext.getCurrentInstance();
+		ExternalContext externalContext =	context.getExternalContext();
+		Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
+		sessionMap.put("recipeEdit", null);
+	}
+	public void addNewRecipe(){
+		FacesContext context	=	FacesContext.getCurrentInstance();
+		ExternalContext externalContext =	context.getExternalContext();
+		Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
+		sessionMap.put("recipeEdit", new RecipeModel());
+	}
 }

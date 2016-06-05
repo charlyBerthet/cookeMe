@@ -61,12 +61,14 @@ public class RecipesDao {
 			connection = connect();
 			query =  connection.createStatement();
 
-			String sql="SELECT description, title, expertise, nbpeople, duration, type FROM recipe";
+			String sql="SELECT description, title, expertise, nbpeople, duration, type, id FROM recipe";
 
 			ResultSet result = query.executeQuery(sql);
 
 			while(result.next()){
-				recipeList.add(new RecipeModel(result.getString("title"), result.getString("description"), result.getInt("expertise"), result.getInt("nbpeople"), result.getInt("duration"), result.getString("type")));
+				RecipeModel recipe = new RecipeModel(result.getString("title"), result.getString("description"), result.getInt("expertise"), result.getInt("nbpeople"), result.getInt("duration"), result.getString("type"));
+				recipe.setId(result.getInt("id"));
+				recipeList.add(recipe);
 			}
 
 			query.close();
@@ -97,6 +99,25 @@ public class RecipesDao {
 
 		return recipeModel;
 	}
+
+	public RecipeModel getRecipeById(int id){
+
+		RecipeModel recipeModel = null;
+		PreparedStatement preparedStatement;
+
+		try {
+			preparedStatement = connect().prepareStatement("select * from recipe where id = ?");
+
+			preparedStatement.setInt(1,id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next())
+				recipeModel = new RecipeModel();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return recipeModel;
+	}
 	
 	public void updateRecipe(RecipeModel recipe){
 
@@ -104,7 +125,7 @@ public class RecipesDao {
 		PreparedStatement preparedStatement;
 
 		try {
-			preparedStatement = connect().prepareStatement("UPDATE recipe SET descrition = ?, title = ?, expertise = ?, nbpeople = ?, duration = ?, type = ? WHERE title=?;");
+			preparedStatement = connect().prepareStatement("UPDATE recipe SET description = ?, title = ?, expertise = ?, nbpeople = ?, duration = ?, type = ? WHERE id=?");
 			
 			preparedStatement.setString(1,recipe.getDescription());
 			preparedStatement.setString(2,recipe.getTitle());
@@ -112,7 +133,7 @@ public class RecipesDao {
 			preparedStatement.setInt(4,recipe.getNbpeople());
 			preparedStatement.setInt(5,recipe.getDurationInt());
 			preparedStatement.setString(6,recipe.getType());
-			preparedStatement.setString(7,recipe.getTitle());
+			preparedStatement.setInt(7,recipe.getId());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 			connection.close();
@@ -125,31 +146,21 @@ public class RecipesDao {
 	}
 	
 	public void deleteRecipe(RecipeModel recipe) {
+		//Création de la requête
 		PreparedStatement query;
 		try{
-			connection = connect();
-
-			String sql 	= 	"INSERT INTO cookbcf.recipe"
-							+"(description, title, expertise, nbpeople, duration, type)"
-							+"VALUES(?, ?, ?, ?, ?, ?)";
-
-			query 		= connection.prepareStatement(sql);
-
-			query.setString(1, recipe.getDescription());
-			query.setString(2, recipe.getTitle());
-			query.setInt(3, recipe.getExpertise());
-			query.setInt(4, recipe.getNbpeople());
-			query.setInt(5, recipe.getDurationInt());
-			query.setString(6, recipe.getType());
-
+			// create connection
+			connection= connect();
+			String sql="DELETE FROM recipe WHERE title = ?";
+			query =  connection.prepareStatement(sql);
+			query.setString(1, recipe.getTitle());
 			query.executeUpdate();
-
 			query.close();
 			connection.close();
-
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	public List<RecipeModel> searchRecipes(int duration,int expertise,int nbPeople,String type){

@@ -17,80 +17,94 @@
 
 
 	<ui:define name="activityContent">
-		<h:panelGrid columns="2" cellpadding="5" id="panel">
+		<h:panelGrid columns="2" cellpadding="10" id="panel">
 			<p:outputPanel id="userList" >
 				<h:dataTable var="recipe" value="#{recipeList}" cellspacing="20">
 
 					<h:column>
-						<f:facet name="header">Name</f:facet>
+						<f:facet name="header">Title</f:facet>
 						<h:outputText value="#{recipe.title}"/>
 					</h:column>
-
 					<h:column>
 						<p:outputPanel>
 							<h:form>
 								<p:commandButton icon="fa fa-times"
-												 update="userList" />
+												 actionListener="#{recipeControlerBean.deleteRecipe(recipe)}"
+												 update="editingPanel userList" />
 								<p:commandButton icon="fa fa-pencil-square-o"
-												 actionListener="#{recipeControlerBean.getRecipeDetail(recipe)}"
-												 update="detail" />
+												 actionListener="#{recipeControlerBean.editRecipe(recipe)}"
+												 update="editingPanel" />
 							</h:form>
 						</p:outputPanel>
 					</h:column>
-					
-				</h:dataTable>
-</p:outputPanel>
 
-<p:outputPanel>
-				<p:panel>
-				<p:panelGrid columns="2" cellpadding="5" id="detail" layout="grid">
-					<p:outputPanel>Title :<p:inputText value="#{recipeEdit.title}"></p:inputText></p:outputPanel>
-					<p:outputPanel></p:outputPanel>
-					<p:outputPanel>
-						<h3>For how many people : <h:outputText id="outputNbPeople" value="#{searchRecipeBean.nbpeople}"/></h3>
-						<h:panelGrid columns="1" style="margin-bottom: 10px">
-							<h:inputHidden id="nbPeople" value="#{recipeEdit.nbpeople}" />
-							<p:slider for="nbPeople" display="outputNbPeople" style="width: 200px" displayTemplate="{value}" minValue="1" maxValue="20"/>
-						</h:panelGrid>
-					</p:outputPanel>
-					
-					<p:outputPanel>
-					<h3>Preparation duration (min):</h3>
-						<!--<p:spinner id="stepDuration" value="#{searchRecipeBean.duration}" mask="00:00" stepFactor="15" min="0"/>-->
-						<p:inputMask id="duration" value="#{recipeEdit.duration}" mask="99:99"/>
-					</p:outputPanel>
-					
-					<p:outputPanel>
-						<h3>Cook expertise:</h3>
-						<p:rating value="#{recipeEdit.expertise}" />
-					</p:outputPanel>
-					
-					<p:outputPanel>
-						<h3>Cook type :</h3>
-						<p:selectOneMenu id="recipeType" value="#{recipeEdit.type}" style="width:125px">
-							<f:selectItem itemLabel="All" itemValue="[ALL]" />
-							<f:selectItem itemLabel="Salad" itemValue="salad" />
-							<f:selectItem itemLabel="Meal" itemValue="meal" />
-							<f:selectItem itemLabel="Fish" itemValue="fish" />
-							<f:selectItem itemLabel="Dessert" itemValue="dessert" />
-						</p:selectOneMenu>
-					</p:outputPanel>
-					
-					<p:outputPanel>
-   						 <p:inputTextarea value="#{recipeEdit.description}" rows="6" cols="33" />
-					</p:outputPanel>
-					
-					<p:outputPanel></p:outputPanel>	
-					<p:commandButton  action="#{recipeControlerBean.updateRecipe(recipeEdit)}" value="Save" />
-					<p:commandButton  value="Cancel" update="detail"/>
-				</p:panelGrid>
-				</p:panel>
+
+				</h:dataTable>
+				<p:commandButton class="button" value="ADD"
+								 actionListener="#{recipeControlerBean.addNewRecipe()}"
+								 update="editingPanel" />
 			</p:outputPanel>
-			
+
+
+
+			<p:outputPanel id="editingPanel">
+				<p:outputPanel rendered="#{recipeEdit != null}" >
+					<h:form>
+						<p:panelGrid columns="2" cellpadding="5" id="detail" layout="grid">
+							<p:outputPanel>Title :<p:inputText value="#{recipeEdit.title}"></p:inputText></p:outputPanel>
+							<p:outputPanel></p:outputPanel>
+							<p:outputPanel>
+								<h3>For how many people : <h:outputText id="outputNbPeople" value="#{searchRecipeBean.nbpeople}"/></h3>
+								<h:panelGrid columns="1" style="margin-bottom: 10px">
+									<h:inputHidden id="nbPeople" value="#{recipeEdit.nbpeople}" />
+									<p:slider for="nbPeople" display="outputNbPeople" style="width: 200px" displayTemplate="{value}" minValue="1" maxValue="20"/>
+								</h:panelGrid>
+							</p:outputPanel>
+
+							<p:outputPanel>
+								<h3>Preparation duration (min):</h3>
+								<p:inputMask id="duration" value="#{recipeEdit.duration}" mask="99:99"/>
+							</p:outputPanel>
+
+							<p:outputPanel>
+								<h3>Cook expertise:</h3>
+								<p:rating value="#{recipeEdit.expertise}" />
+							</p:outputPanel>
+
+							<p:outputPanel>
+								<h3>Cook type :</h3>
+								<p:selectOneMenu id="recipeType" value="#{recipeEdit.type}" style="width:125px">
+									<f:selectItem itemLabel="All" itemValue="[ALL]" />
+									<f:selectItem itemLabel="Salad" itemValue="salad" />
+									<f:selectItem itemLabel="Meal" itemValue="meal" />
+									<f:selectItem itemLabel="Fish" itemValue="fish" />
+									<f:selectItem itemLabel="Dessert" itemValue="dessert" />
+								</p:selectOneMenu>
+							</p:outputPanel>
+
+							<p:outputPanel>
+								<p:inputTextarea value="#{recipeEdit.description}" rows="6" cols="33" />
+							</p:outputPanel>
+						</p:panelGrid>
+
+						<p:outputPanel>
+
+							<p:commandButton value="Cancel"
+											 actionListener="#{recipeControlerBean.cancelEditRecipe()}"
+											 update="editingPanel"
+											 style="float: left"/>
+							<p:commandButton value="Save"
+											 actionListener="#{recipeControlerBean.updateRecipe(recipeEdit)}"
+											 update="editingPanel userList"
+											 style="float: right"/>
+
+						</p:outputPanel>
+					</h:form>
+				</p:outputPanel>
+			</p:outputPanel>
+
 		</h:panelGrid>
-			
-			
-		
+
 	</ui:define>
 
 </ui:composition>

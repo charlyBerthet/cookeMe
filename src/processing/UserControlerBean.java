@@ -1,6 +1,7 @@
 package processing;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
@@ -9,10 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import model.LoginBean;
-import model.SessionListen;
-import model.UserModelBean;
-import model.UserSubmissionModelBean;
+import model.*;
 import dao.fabric.DaoFabric;
 import dao.instance.UserDao;
 
@@ -104,5 +102,24 @@ public class UserControlerBean implements Serializable{
 			e.printStackTrace();
 		}
 
+	}
+
+
+	public void loadAllUser(){
+		List<UserModelBean> list = this.userDao.getAllUser();
+		ExternalContext externalContext =	FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
+		sessionMap.put("allUser", list);
+	}
+
+	public void deleteUser(UserModelBean user){
+
+	}
+
+	public void editUser(UserModelBean user){
+		FacesContext context	=	FacesContext.getCurrentInstance();
+		ExternalContext externalContext =	context.getExternalContext();
+		Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
+		sessionMap.put("userEditing", user);
 	}
 }

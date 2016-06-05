@@ -58,10 +58,12 @@ public class UserDao {
 			// create connection
 			connection= connect();
 			query =  connection.createStatement();
-			String sql="SELECT surname, lastname, login, email, pwd, age FROM user";
+			String sql="SELECT surname, lastname, login, email, pwd, age, isAdmin FROM user";
 			ResultSet result = query.executeQuery(sql);
 			while(result.next()){
-				userList.add(new UserModelBean(result.getString("surname"), result.getString("lastname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age")));
+				UserModelBean user = new UserModelBean(result.getString("surname"), result.getString("lastname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age"));
+				user.setIsAdmin(result.getBoolean("isAdmin"));
+				userList.add(user);
 			}
 			query.close();
 			connection.close();

@@ -113,7 +113,8 @@ public class UserControlerBean implements Serializable{
 	}
 
 	public void deleteUser(UserModelBean user){
-
+		this.userDao.deleteUser(user);
+		this.loadAllUser();
 	}
 
 	public void editUser(UserModelBean user){
@@ -121,5 +122,25 @@ public class UserControlerBean implements Serializable{
 		ExternalContext externalContext =	context.getExternalContext();
 		Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
 		sessionMap.put("userEditing", user);
+	}
+
+	public void addNewUser(){
+		FacesContext context	=	FacesContext.getCurrentInstance();
+		ExternalContext externalContext =	context.getExternalContext();
+		Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
+		sessionMap.put("userEditing", new UserModelBean());
+	}
+	public void cancelEditUser(){
+		FacesContext context	=	FacesContext.getCurrentInstance();
+		ExternalContext externalContext =	context.getExternalContext();
+		Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
+		sessionMap.put("userEditing", null);
+	}
+	public void saveEditUser(UserModelBean user){
+		if ( this.userDao.checkUser(user.getLogin(), user.getPwd()) != null)
+			this.userDao.updateUser(user);
+		else
+			this.userDao.addUserWithAdmin(user);
+		this.loadAllUser();
 	}
 }

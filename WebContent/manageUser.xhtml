@@ -33,14 +33,14 @@
 					</h:column>
 					<h:column>
 						<f:facet name="header">Admin</f:facet>
-						<h:outputText value="#{user.isAdmin}"/>
+						<h:selectBooleanCheckbox value="#{user.isAdmin}" rendered="#{user.isAdmin}" disabled="true"/>
 					</h:column>
 					<h:column>
 						<p:outputPanel>
 							<h:form>
 								<p:commandButton icon="fa fa-times"
 												 actionListener="#{userControlerBean.deleteUser(user)}"
-												 update="editingPanel" />
+												 update="editingPanel userList" />
 								<p:commandButton icon="fa fa-pencil-square-o"
 												 actionListener="#{userControlerBean.editUser(user)}"
 												 update="editingPanel" />
@@ -50,14 +50,17 @@
 
 
 				</h:dataTable>
-				<p:commandButton class="button" value="ADD" />
+				<p:commandButton class="button" value="ADD"
+								 actionListener="#{userControlerBean.addNewUser()}"
+								 update="editingPanel" />
 			</p:outputPanel>
 
 
 
-
-			<p:outputPanel rendered="#{userEditing != null}" id="editingPanel">
-				<h:panelGrid id="grid" columns="3" cellpadding="5">
+			<p:outputPanel id="editingPanel">
+			<p:outputPanel rendered="#{userEditing != null}" >
+				<h:form>
+				<h:panelGrid id="grid" columns="3" cellpadding="5" style="display: inline">
 					<h:outputLabel for="surname" value="Surname:" style="font-weight:bold"/>
 					<p:inputText id="surname" value="#{userEditing.surname}" required="true" validatorMessage="Entrez que des lettres">
 						<f:validateRegex pattern="[a-zA-Z]+"></f:validateRegex>
@@ -95,14 +98,31 @@
 
 
 					<h:outputLabel for="pwd" value="Password" style="font-weight:bold"/>
-					<p:password id="pwd" value="#{userEditing.pwd}" match="pwd2" label="Password :" required="true" />
+					<p:password redisplay="true" id="pwd" value="#{userEditing.pwd}" match="pwd2" label="Password :" required="true" />
 					<p:message for="pwd" />
 
 					<h:outputLabel for="pwd2" value="Re-Enter Password : " style="font-weight:bold"/>
-					<p:password id="pwd2" value="#{userEditing.pwd}" label="pwd2" required="true" />
+					<p:password redisplay="true" id="pwd2" value="#{userEditing.pwd}" label="pwd2" required="true" />
 					<p:message for="pwd2" />
 				</h:panelGrid>
+				admin <h:selectBooleanCheckbox value="#{userEditing.isAdmin}" />
+
+				<p:outputPanel>
+
+						<p:commandButton value="Cancel"
+										 actionListener="#{userControlerBean.cancelEditUser()}"
+										 update="editingPanel"
+										style="float: left"/>
+						<p:commandButton value="Save"
+										 actionListener="#{userControlerBean.saveEditUser(userEditing)}"
+										 update="editingPanel userList"
+										 style="float: right"/>
+
+				</p:outputPanel>
+				</h:form>
 			</p:outputPanel>
+			</p:outputPanel>
+
 		</h:panelGrid>
 	</ui:define>
 

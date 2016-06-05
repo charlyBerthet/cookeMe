@@ -50,6 +50,77 @@ public class UserDao {
 
 	}
 
+	public void addUserWithAdmin(UserModelBean user) {
+		//Création de la requête
+		PreparedStatement query;
+		try{
+			// create connection
+			connection= connect();
+			String sql="INSERT INTO user(surname, lastname, email, login, pwd, age, isAdmin) VALUES(?, ?, ?, ?, ?, ?, ?)";
+			query =  connection.prepareStatement(sql);
+			query.setString(1, user.getSurname());
+			query.setString(2, user.getLastname());
+			query.setString(3,user.getEmail());
+			query.setString(4, user.getLogin());
+			query.setString(5, user.getPwd());
+			query.setInt(6, user.getAge());
+			query.setBoolean(7, user.getIsAdmin());
+			query.executeUpdate();
+			//connection.commit();
+			query.close();
+			//connection.close();
+			connection.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+
+	public void updateUser(UserModelBean user) {
+		//Création de la requête
+		PreparedStatement query;
+		try{
+			// create connection
+			connection= connect();
+			String sql="UPDATE user SET surname = ?, lastname = ?, email = ?, login = ?, pwd = ?, age = ?, isAdmin = ? WHERE id = ?";
+			query =  connection.prepareStatement(sql);
+			query.setString(1, user.getSurname());
+			query.setString(2, user.getLastname());
+			query.setString(3,user.getEmail());
+			query.setString(4, user.getLogin());
+			query.setString(5, user.getPwd());
+			query.setInt(6, user.getAge());
+			query.setBoolean(7,user.getIsAdmin());
+			query.setInt(8, user.getId());
+			query.executeUpdate();
+			query.close();
+			connection.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+
+	public void deleteUser(UserModelBean user) {
+		//Création de la requête
+		PreparedStatement query;
+		try{
+			// create connection
+			connection= connect();
+			String sql="DELETE FROM user WHERE id = ?";
+			query =  connection.prepareStatement(sql);
+			query.setInt(1, user.getId());
+			query.executeUpdate();
+			query.close();
+			connection.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public List<UserModelBean> getAllUser(){
 		//return value
 		List<UserModelBean> userList=new ArrayList<>();
@@ -58,11 +129,12 @@ public class UserDao {
 			// create connection
 			connection= connect();
 			query =  connection.createStatement();
-			String sql="SELECT surname, lastname, login, email, pwd, age, isAdmin FROM user";
+			String sql="SELECT surname, lastname, login, email, pwd, age, isAdmin, id FROM user";
 			ResultSet result = query.executeQuery(sql);
 			while(result.next()){
 				UserModelBean user = new UserModelBean(result.getString("surname"), result.getString("lastname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age"));
 				user.setIsAdmin(result.getBoolean("isAdmin"));
+				user.setId(result.getInt("id"));
 				userList.add(user);
 			}
 			query.close();

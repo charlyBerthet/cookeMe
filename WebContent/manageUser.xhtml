@@ -8,15 +8,10 @@
 <f:view beforePhase="#{userControlerBean.loadAllUser()}" />
 
 
-<ui:composition template="templates/mainTemplate.xhtml">
+<ui:composition template="templates/manageTemplate.xhtml">
 	<ui:define name="cssBlock">
 		<h:outputStylesheet library="style" name="manageUserStyle.css" />
 	</ui:define>
-
-
-	<ui:define name="activityTitle">Administration</ui:define>
-	<ui:define name="registerBlock"></ui:define>
-	<ui:define name="loginBlock"></ui:define>
 
 	<ui:define name="activityContent">
 		<h:panelGrid columns="2" cellpadding="10" id="panel">

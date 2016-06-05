@@ -93,7 +93,9 @@ public class RecipeControlerBean implements Serializable{
 		}
 
 	}
-	
+	public void updateRecipe(RecipeModel recipe){
+		this.recipeDao.updateRecipe(recipe);
+	}
 	public void getRecipeDetail(RecipeModel recipe){
 		recipe = this.recipeDao.getRecipeByTitle(recipe.getTitle());
 

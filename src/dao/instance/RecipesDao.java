@@ -97,6 +97,30 @@ public class RecipesDao {
 
 		return recipeModel;
 	}
+	
+	public void updateRecipe(RecipeModel recipe){
+
+		RecipeModel recipeModel = null;
+		PreparedStatement preparedStatement;
+
+		try {
+			preparedStatement = connect().prepareStatement("UPDATE cookbcf.recipe SET descrition=?, title=?, expertise=?, nbpeople=?, duration=?, `type`=? WHERE title=?;");
+			
+			preparedStatement.setString(1,recipe.getDescription());
+			preparedStatement.setString(2,recipe.getTitle());
+			preparedStatement.setInt(3,recipe.getExpertise());
+			preparedStatement.setInt(4,recipe.getNbpeople());
+			preparedStatement.setInt(5,recipe.getDurationInt());
+			preparedStatement.setString(6,recipe.getType());
+			preparedStatement.setString(7,recipe.getTitle());
+			ResultSet resultSet = preparedStatement.executeQuery();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
+	}
 
 	public List<RecipeModel> searchRecipes(int duration,int expertise,int nbPeople,String type){
 		List<RecipeModel> recipeModels = new ArrayList<>();

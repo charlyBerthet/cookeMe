@@ -29,7 +29,8 @@
 
 					<p:column>
 						<!-- <i class="fa fa-trash fa-lg"></i> -->
-						<p:commandButton action="#{recipeControlerBean.getRecipeDetail(recipe)}" update="detail" validateClient="true" value="edit" />
+						<p:commandButton action="#{recipeControlerBean.getRecipeDetail(recipe)}" update="test" value="edit" />
+						<h:outputText id="test" value="#{recipeEdit.title}"></h:outputText>
 					</p:column>
 
 				</p:dataTable>
@@ -76,7 +77,7 @@
 					</p:outputPanel>
 					
 					<p:outputPanel></p:outputPanel>	
-					<p:commandButton  value="Save" />
+					<p:commandButton  action="#{recipeControlerBean.updateRecipe(recipeEdit)}" value="Save" />
 					<p:commandButton  value="Cancel" />
 				</p:panelGrid>
 				</p:panel>

@@ -10,6 +10,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import model.LoginBean;
+import model.SessionListen;
 import model.UserModelBean;
 import model.UserSubmissionModelBean;
 import dao.fabric.DaoFabric;
@@ -22,6 +23,7 @@ public class UserControlerBean implements Serializable{
 	
 	public UserControlerBean() {
 		this.userDao=DaoFabric.getInstance().createUserDao();
+		new SessionListen();
 	}
 	
 	public boolean checkUser(LoginBean loginBean){

@@ -39,7 +39,7 @@ public class RecipeControlerBean implements Serializable{
 		Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
 
 		//place la liste de recette dans l'espace de mémoire de JSF
-		sessionMap.put("recipeList", recipeList);
+		sessionMap.put("recipeList", recipeList.getRecipeList());
 	}
 
 
@@ -92,6 +92,16 @@ public class RecipeControlerBean implements Serializable{
 			e.printStackTrace();
 		}
 
+	}
+	public void updateRecipe(RecipeModel recipe){
+		this.recipeDao.updateRecipe(recipe);
+	}
+	public void getRecipeDetail(RecipeModel recipe){
+		recipe = this.recipeDao.getRecipeByTitle(recipe.getTitle());
+
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		sessionMap.put("recipeEdit", recipe);
 	}
 
 }

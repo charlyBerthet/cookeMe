@@ -78,7 +78,7 @@
 							<p>
 								Welcome <a href="">#{userControlerBean.getLoggedUser().login}</a>
 							</p>
-							<p>52 users already connected</p>
+							<p>#{userModelBean.nbSession} users already connected</p>
 							<p:commandButton id="butLogout" icon="fa fa-sign-out"
 											 actionListener="#{userControlerBean.logout()}"
 											 update="loginLogoutBlock registerBlock allContent"/>

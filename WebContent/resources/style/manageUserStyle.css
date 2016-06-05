@@ -8,6 +8,9 @@
 	border:1px solid #333;
 }
 
+#panel{
+	margin: auto;
+}
 #editingPanel > div{
 	margin-left: 10px;
 	padding: 10px;

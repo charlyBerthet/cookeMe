@@ -94,9 +94,14 @@ public class UserControlerBean implements Serializable{
 		Map<String, Object> sessionMap 	= 	externalContext.getSessionMap();
 
 		sessionMap.put("loggedAdminUser", userFound);
-		if( userFound != null)
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Successful",  "Connection success") );
-		else
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hmmm....",  "Connection fail") );
+		try{
+			if( userFound != null)
+				externalContext.redirect("adminMenu.xhtml");
+			else
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hmmm....",  "Connection fail") );
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
 	}
 }

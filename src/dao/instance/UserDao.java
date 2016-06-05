@@ -109,8 +109,16 @@ public class UserDao {
 			ResultSet result = preparedStatement.executeQuery();
 
 			if(result.next()){
-				userCheck = new UserModelBean(result.getString("lastname"), result.getString("surname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age"), result.getDate("lastConnection"));
+				userCheck = new UserModelBean(result.getString("lastname"), result.getString("surname"),result.getString("email"), result.getString("login"), result.getString("pwd"),result.getInt("age"), new java.util.Date(result.getTimestamp("lastConnection").getTime()));
 			}
+			preparedStatement.close();
+
+			// MAJ user date connection
+			sql="UPDATE user SET lastConnection = ? where login = ?";
+			preparedStatement =  connection.prepareStatement(sql);
+			preparedStatement.setTimestamp(1, new Timestamp(new java.util.Date().getTime()));
+			preparedStatement.setString(2, login);
+			preparedStatement.executeUpdate();
 			preparedStatement.close();
 			connection.close();
 		}catch(SQLException e) {

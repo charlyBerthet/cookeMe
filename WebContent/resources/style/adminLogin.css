@@ -11,3 +11,12 @@
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+.menuAdminBlock{
+	color:#333;
+	border: 1px solid #999;
+	margin: 10px;
+	text-align: center;
+	padding: 20vh 0px;
+	font-size: 1.2em;
+}

@@ -19,15 +19,18 @@
 	<ui:define name="loginBlock"></ui:define>
 
 	<ui:define name="activityContent">
+	<p:commandButton value="TEST" action="#{recipeControlerBean.getRecipeDetail}" />
 		<h:panelGrid columns="2" cellpadding="5" id="panel">
 			<p:outputPanel>
-				<h:dataTable var="recipe" value="#{recipeList}">
+				<h:dataTable id="table" var="recipe" value="#{recipeList}">
 
 					<h:column headerText="Title">
 						<h:outputText value="#{recipe.title}"/>
-						<h:commandButton value="edit" action="#{recipeControlerBean.getRecipeDetail()}">    
+						<h:form>
+						<h:commandButton value="edit" action="#{recipeControlerBean.getRecipeDetail()}" update="">    
       						<f:setPropertyActionListener value="#{recipe.title}" target="#{recipeControlerBean.selectedRecipe}" /> 
     					</h:commandButton>
+    					</h:form>
 					</h:column>
 
 				 <h:column>
@@ -39,8 +42,7 @@
 				</h:dataTable>
 				<p:commandButton class="button" value="ADD" />
 			</p:outputPanel>
-
-			<p:outputPanel>
+<p:outputPanel>
 				<p:panel>
 				<p:panelGrid columns="2" cellpadding="5" id="detail" layout="grid">
 					<p:outputPanel>Title :<p:inputText value="#{recipeEdit.title}"></p:inputText></p:outputPanel>
@@ -85,6 +87,8 @@
 				</p:panelGrid>
 				</p:panel>
 			</p:outputPanel>
+			
+			
 		</h:panelGrid>
 	</ui:define>
 

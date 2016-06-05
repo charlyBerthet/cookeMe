@@ -22,6 +22,7 @@ public class RecipeControlerBean implements Serializable{
 
 	private RecipesDao recipeDao;
 	private String selectedRecipe;
+	
 	public RecipeControlerBean() {
 		this.recipeDao=DaoFabric.getInstance().createRecipesDao();
 	}
@@ -97,12 +98,12 @@ public class RecipeControlerBean implements Serializable{
 		this.recipeDao.updateRecipe(recipe);
 	}
 	public void getRecipeDetail(){
-		System.out.println(selectedRecipe);
-		/*recipe = this.recipeDao.getRecipeByTitle(recipe.getTitle());
+		//System.out.println(selectedRecipe);
+		RecipeModel recipe = this.recipeDao.getRecipeByTitle(selectedRecipe);
 
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		Map<String, Object> sessionMap = externalContext.getSessionMap();
-		sessionMap.put("recipeEdit", recipe);*/
+		sessionMap.put("recipeEdit", recipe);
 	}
 
 	public void setSelectedRecipe(String selectedRecipe) {

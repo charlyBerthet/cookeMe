@@ -9,6 +9,7 @@
 <ui:composition template="templates/mainTemplate.xhtml">
 	<ui:define name="activityTitle">Recipes</ui:define>
 	<ui:define name="activityContent">
+	<p:commandButton value="TEST" action="#{recipeControlerBean.getRecipeDetail}" />
 		<p:dataGrid var="recipe" value="#{recipes}" columns="3" layout="grid"
 			rows="12" paginator="true" id="recipesGrid"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -39,6 +40,7 @@
 
 						<p:outputPanel style="text-align: right">#{recipe.description}</p:outputPanel>
 
+					<p:commandButton action="#{recipeControlerBean.displayRecipeDetail(recipe)}" value="Voir en détail" />
 					<p:commandButton action="#{recipeControlerBean.displayRecipeDetail(recipe)}" value="Voir en détail" />
 				</div>
 

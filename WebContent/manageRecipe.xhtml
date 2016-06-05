@@ -18,27 +18,30 @@
 
 	<ui:define name="activityContent">
 		<h:panelGrid columns="2" cellpadding="5" id="panel">
-			<p:outputPanel>
-				<h:dataTable var="recipe" value="#{recipeList}">
+			<p:outputPanel id="userList" >
+				<h:dataTable var="recipe" value="#{recipeList}" cellspacing="20">
 
-					<h:column headerText="Title">
+					<h:column>
+						<f:facet name="header">Name</f:facet>
 						<h:outputText value="#{recipe.title}"/>
-						<h:commandButton value="edit" action="#{recipeControlerBean.getRecipeDetail()}">    
-      						<f:setPropertyActionListener value="#{recipe.title}" target="#{recipeControlerBean.selectedRecipe}" /> 
-    					</h:commandButton>
 					</h:column>
 
-				 <h:column>
-						<!-- <i class="fa fa-trash fa-lg"></i> -->
-						<p:commandButton action="#{recipeControlerBean.getRecipeDetail(recipe)}" update="test" value="edit" />
-						<h:outputText id="test" value="#{recipeEdit.title}"></h:outputText>
+					<h:column>
+						<p:outputPanel>
+							<h:form>
+								<p:commandButton icon="fa fa-times"
+												 update="userList" />
+								<p:commandButton icon="fa fa-pencil-square-o"
+												 actionListener="#{recipeControlerBean.getRecipeDetail(recipe)}"
+												 update="detail" />
+							</h:form>
+						</p:outputPanel>
 					</h:column>
-
+					
 				</h:dataTable>
-				<p:commandButton class="button" value="ADD" />
-			</p:outputPanel>
+</p:outputPanel>
 
-			<p:outputPanel>
+<p:outputPanel>
 				<p:panel>
 				<p:panelGrid columns="2" cellpadding="5" id="detail" layout="grid">
 					<p:outputPanel>Title :<p:inputText value="#{recipeEdit.title}"></p:inputText></p:outputPanel>
@@ -79,11 +82,15 @@
 					
 					<p:outputPanel></p:outputPanel>	
 					<p:commandButton  action="#{recipeControlerBean.updateRecipe(recipeEdit)}" value="Save" />
-					<p:commandButton  value="Cancel" />
+					<p:commandButton  value="Cancel" update="detail"/>
 				</p:panelGrid>
 				</p:panel>
 			</p:outputPanel>
+			
 		</h:panelGrid>
+			
+			
+		
 	</ui:define>
 
 </ui:composition>
